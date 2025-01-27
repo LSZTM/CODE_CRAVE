@@ -316,19 +316,21 @@ def quiz_taker():
     if "username" not in st.session_state:
         st.session_state["username"] = ""
 
-    if not st.session_state["username"]:
+    if "quiz_started" not in st.session_state:
+        st.session_state["quiz_started"] = False
+
+    if not st.session_state["quiz_started"]:
         st.title("Enter Your Username")
         st.text_input("Username:", key="username")
         if st.button("Start Quiz"):
             if st.session_state["username"]:
-                # Reset relevant session states when starting the quiz
                 st.session_state["current_question"] = 0
                 st.session_state["user_answers"] = {}
                 st.session_state["answered_questions"] = []
                 st.session_state["answer_version"] = 0
-                st.session_state["start_time"] = time.time()  # Start timer
-
-                st.experimental_rerun()  # Rerun the app to start the quiz
+                st.session_state["start_time"] = time.time() 
+                st.session_state["quiz_started"] = True  # Set flag to indicate quiz has started
+                st.experimental_rerun()
             else:
                 st.warning("Please enter a username.")
         return
@@ -341,46 +343,7 @@ def quiz_taker():
     answer_version = st.session_state.get("answer_version", 0)  # Initialize version counter
 
     if current_question_idx >= len(questions):
-        st.success("Quiz Completed!")
-
-        # Calculate score and elapsed time
-        correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
-        total_questions = len(questions)
-        score_percentage = int((correct_answers / total_questions) * 100)
-        elapsed_time = time.time() - st.session_state["start_time"] 
-
-        # Update leaderboard (using a simple in-memory list for this example)
-        if "leaderboard" not in st.session_state:
-            st.session_state["leaderboard"] = []
-
-        new_score = {"username": st.session_state["username"], 
-                    "score": score_percentage, 
-                    "time": elapsed_time}
-        st.session_state["leaderboard"].append(new_score)
-
-        # Sort leaderboard by score (descending)
-        st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"])) 
-
-        # Display leaderboard
-        st.subheader("Leaderboard")
-        if st.session_state.get("leaderboard"):
-            for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):  # Show top 5 scores
-                st.write(f"{rank}. {entry['username']}: {entry['score']}% - Time: {entry['time']:.2f} seconds")
-        else:
-            st.write("No scores yet.")
-
-        st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
-        st.write(f"Time Taken: {elapsed_time:.2f} seconds")
-
-        with st.expander("Quiz Summary"):
-            for i, q in enumerate(questions):
-                answer = st.session_state["user_answers"].get(i, "Not Answered")
-                correct_option = q["correct_option"]
-                option_text = questions[i]["options"][correct_option]
-                st.write(f"Q{i + 1}: {q['question']}")
-                st.write(f"Your Answer: {answer}")
-                st.write(f"Correct Answer: {option_text}")
-        return
+        # ... (Your existing quiz completion logic)
 
     question = questions[current_question_idx]
     language = question.get("language", None) 
