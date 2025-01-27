@@ -360,7 +360,7 @@ def quiz_taker():
         st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"])) 
 
         # Display leaderboard
-         correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
+        correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
         total_questions = len(questions)
         score_percentage = int((correct_answers / total_questions) * 100)
         elapsed_time = time.time() - st.session_state["start_time"] 
