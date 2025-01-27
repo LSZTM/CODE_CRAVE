@@ -330,7 +330,7 @@ def quiz_taker():
                 st.session_state["answer_version"] = 0
                 st.session_state["start_time"] = time.time() 
                 st.session_state["quiz_started"] = True  # Set flag to indicate quiz has started
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.warning("Please enter a username.")
         return
