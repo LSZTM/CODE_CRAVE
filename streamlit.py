@@ -322,13 +322,35 @@ def quiz_taker():
 
     if current_question_idx >= len(questions):
         st.success("Quiz Completed!")
+
+        # Calculate score
         correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
         total_questions = len(questions)
         score_percentage = int((correct_answers / total_questions) * 100)
-        st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
 
-        # Update leaderboard (if implemented)
-        # ... (code to update leaderboard with username and score)
+        # Get username (you might want to use a more secure method for storing user data)
+        username = st.text_input("Enter your username:")
+
+        # Update leaderboard (using a simple in-memory list for this example)
+        if username:
+            if "leaderboard" not in st.session_state:
+                st.session_state["leaderboard"] = []
+
+            new_score = {"username": username, "score": score_percentage}
+            st.session_state["leaderboard"].append(new_score)
+
+            # Sort leaderboard by score (descending)
+            st.session_state["leaderboard"].sort(key=lambda x: x["score"], reverse=True)
+
+        # Display leaderboard
+        st.subheader("Leaderboard")
+        if st.session_state.get("leaderboard"):
+            for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):  # Show top 5 scores
+                st.write(f"{rank}. {entry['username']}: {entry['score']}%")
+        else:
+            st.write("No scores yet.")
+
+        st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
 
         with st.expander("Quiz Summary"):
             for i, q in enumerate(questions):
@@ -341,7 +363,7 @@ def quiz_taker():
         return
 
     question = questions[current_question_idx]
-    language = question.get("language", None)
+    language = question.get("language", None) 
 
     # Display current question
     with st.expander(f"Question {current_question_idx + 1}", expanded=True):
