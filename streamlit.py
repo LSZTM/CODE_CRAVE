@@ -117,8 +117,8 @@ def quiz_maker():
         st.success("Quiz saved successfully!")
 
 # Quiz Taker functionality
-import streamlit as st
-import json
+
+
 
 # Initialize session state
 if "quiz_data" not in st.session_state:
@@ -317,27 +317,36 @@ def quiz_taker():
 
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
-    
+
     answer_version = st.session_state.get("answer_version", 0)  # Initialize version counter
 
     if current_question_idx >= len(questions):
         st.success("Quiz Completed!")
-        st.write(f"Your Score: {len([q for q in st.session_state['user_answers'].values() if q])}/{len(questions)}")
+        correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
+        total_questions = len(questions)
+        score_percentage = int((correct_answers / total_questions) * 100)
+        st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
+
+        # Update leaderboard (if implemented)
+        # ... (code to update leaderboard with username and score)
+
         with st.expander("Quiz Summary"):
             for i, q in enumerate(questions):
                 answer = st.session_state["user_answers"].get(i, "Not Answered")
+                correct_option = q["correct_option"]
+                option_text = questions[i]["options"][correct_option]
                 st.write(f"Q{i + 1}: {q['question']}")
                 st.write(f"Your Answer: {answer}")
+                st.write(f"Correct Answer: {option_text}")
         return
 
     question = questions[current_question_idx]
-    language = question.get("language", None) 
+    language = question.get("language", None)
 
     # Display current question
     with st.expander(f"Question {current_question_idx + 1}", expanded=True):
         if language:
-            st.code(question['question'], language=language)  # Use st.code() for code formatting
-        
+            st.code(question["question"], language=language)  # Use st.code() for code formatting
         else:
             st.write(f"**{question['question']}**")
         options = question["options"]
