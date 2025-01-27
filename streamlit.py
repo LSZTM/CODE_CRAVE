@@ -348,7 +348,7 @@ def quiz_taker():
         
 
         # Update leaderboard (using a simple in-memory list for this example)
-        if username:
+        if username in st.session_state:
             if "leaderboard" not in st.session_state:
                 st.session_state["leaderboard"] = []
 
