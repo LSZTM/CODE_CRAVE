@@ -363,7 +363,7 @@ def quiz_taker():
         st.subheader("Leaderboard")
         if st.session_state.get("leaderboard"):
             for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):  # Show top 5 scores
-                st.write(f"{rank}. {entry[st.session_state['username']]}: {entry['score']}% - Time: {entry['time']:.2f} seconds")
+                st.write(f"{rank}. {entry[st.session_state["username"]]}: {entry['score']}% - Time: {entry['time']:.2f} seconds")
         else:
             st.write("No scores yet.")
 
