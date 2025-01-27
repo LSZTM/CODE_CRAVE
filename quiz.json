@@ -1,0 +1,202 @@
+{
+  "title": "CODE CRAVE",
+  "semester": "1",
+  "num_questions": 16,
+  "questions": [
+    {
+      "question": "Which of the following functions is used to read a string in C?",
+      "options": [
+        "A) scanf()",
+        "B) printf()",
+        "C) fgets()",
+        "D) puts()"
+      ],
+      "correct_option": 2, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "What will be the output of the following code snippet?\n\nprintf(\"%d\", 5 + 2 * 3);",
+      "options": [
+        "A) 21",
+        "B) 11",
+        "C) 16",
+        "D) 15"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "C" 
+    },
+    {
+      "question": "Which function is used to dynamically allocate memory in C?",
+      "options": [
+        "A) malloc()",
+        "B) free()",
+        "C) sizeof()",
+        "D) realloc()"
+      ],
+      "correct_option": 0, 
+      "time_limit": 120,
+      "image": null,
+      "language": "" 
+    },
+    {
+      "question": "What will be the output of the following code?\n\nint a = 10, *p = &a;\nprintf(\"%d\", *p + 5);",
+      "options": [
+        "A) 10",
+        "B) 15",
+        "C) Garbage Value",
+        "D) Compilation Error"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "C" 
+    },
+    {
+      "question": "What will happen if you try to dereference a NULL pointer in C?",
+      "options": [
+        "A) The program will crash", 
+        "B) Undefined behavior", 
+        "C) The program will compile but throw an error at runtime",
+        "D) None of the above"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "" 
+    },
+    {
+      "question": "What is the correct way to iterate over a dictionary to access both keys and values?",
+      "options": [
+        "A) for k in dict.keys()",
+        "B) for k, v in dict.items()",
+        "C) for v in dict.values()",
+        "D) for dict"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "" 
+    },
+    {
+      "question": "What is the output of the following Python code?\n\nmy_list = [1, 2, 3, 4]\nprint(my_list[2]);",
+      "options": [
+        "A) 1",
+        "B) 2",
+        "C) 3",
+        "D) 4"
+      ],
+      "correct_option": 2, 
+      "time_limit": 120,
+      "image": null,
+      "language": "Python" 
+    },
+    {
+      "question": "What is the output of the following code?\n\nmy_set = {1, 2, 3, 4}\nmy_set.add(5)\nprint(len(my_set));",
+      "options": [
+        "A) 4",
+        "B) 5",
+        "C) 6",
+        "D) Error"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "Python" 
+    },
+    {
+      "question": "What will print(len({\"a\": 1, \"b\": 2})) output?",
+      "options": [
+        "A) 1",
+        "B) 2",
+        "C) 3",
+        "D) Error"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "Python" 
+    },
+    {
+      "question": "What will be the output of the following code?\n\nfor i in range(3):\n print('*' * (i + 1));",
+      "options": [
+        "A) *\n**\n***",
+        "B) ***\n**\n*",
+        "C) ***\n***\n***",
+        "D) Error"
+      ],
+      "correct_option": 0, 
+      "time_limit": 120,
+      "image": null,
+      "language": "Python" 
+    },
+    {
+      "question": "Which class in Java is used for reading input from the console?",
+      "options": [
+        "A) Scanner",
+        "B) BufferedReader",
+        "C) InputStream",
+        "D) FileReader"
+      ],
+      "correct_option": 0, 
+      "time_limit": 120,
+      "image": null,
+      "language": "" 
+    },
+    {
+      "question": "What will the following code snippet output if the user inputs \"Hello\"?\n\nScanner sc = new Scanner(System.in);\nSystem.out.println(sc.nextLine());",
+      "options": [
+        "A) Error",
+        "B) The input entered by the user",
+        "C) Nothing",
+        "D) Compilation error"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "Java" 
+    },
+    {
+      "question": "What is the correct way to print text in C++?",
+      "options": [
+        "A) cout >> \"Hello\";",
+        "B) cin << \"Hello\";",
+        "C) cout << \"Hello\";",
+        "D) print \"Hello\";"
+      ],
+      "correct_option": 2, 
+      "time_limit": 120,
+      "image": null,
+      "language": "" 
+    },
+    {
+      "question": "Which operator is used to allocate memory dynamically in C++?",
+      "options": [
+        "A) new",
+        "B) malloc",
+        "C) calloc",
+        "D) allocate"
+      ],
+      "correct_option": 0, 
+      "time_limit": 120,
+      "image": null,
+      "language": "" 
+    },
+    {
+      "question": "What does the following code output?\n\nclass A {\npublic:\n void display() {\n cout << \"Base Class\";\n }\n};\nclass B : public A {\npublic:\n void display() {\n cout << \"Derived Class\";\n }\n};\nint main() {\n B obj;\n obj.display();\n return 0;",
+      "options": [
+        "A) Base Class",
+        "B) Derived Class",
+        "C) Error",
+        "D) None of the above"
+      ],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": "C++" 
+    }
+  ]
+}
