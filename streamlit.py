@@ -343,7 +343,7 @@ def quiz_taker():
     answer_version = st.session_state.get("answer_version", 0)  # Initialize version counter
 
     if current_question_idx >= len(questions):
-        # ... (Your existing quiz completion logic)
+        st.success("Quiz Completed!")
 
     question = questions[current_question_idx]
     language = question.get("language", None) 
