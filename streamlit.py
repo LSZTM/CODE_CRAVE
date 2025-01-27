@@ -307,11 +307,9 @@ def add_custom_styles():
 def quiz_taker():
     add_custom_styles()
 
-    if not st.session_state["quiz_data"]:
-        st.error("No quiz available to take!")
+    quiz_data = load_quiz_data()
+    if not quiz_data:
         return
-
-    quiz_data = st.session_state["quiz_data"]
 
     if "username" not in st.session_state:
         st.session_state["username"] = ""
@@ -329,7 +327,7 @@ def quiz_taker():
                 st.session_state["answered_questions"] = []
                 st.session_state["answer_version"] = 0
                 st.session_state["start_time"] = time.time() 
-                st.session_state["quiz_started"] = True  # Set flag to indicate quiz has started
+                st.session_state["quiz_started"] = True
                 st.rerun()
             else:
                 st.warning("Please enter a username.")
@@ -340,38 +338,63 @@ def quiz_taker():
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
 
-    answer_version = st.session_state.get("answer_version", 0)  # Initialize version counter
-
     if current_question_idx >= len(questions):
         st.success("Quiz Completed!")
+        correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
+        total_questions = len(questions)
+        score_percentage = int((correct_answers / total_questions) * 100)
+
+        
+        
+
+        # Update leaderboard (using a simple in-memory list for this example)
+        if username:
+            if "leaderboard" not in st.session_state:
+                st.session_state["leaderboard"] = []
+
+            new_score = {"username": username, "score": score_percentage}
+            st.session_state["leaderboard"].append(new_score)
+
+            # Sort leaderboard by score (descending)
+            st.session_state["leaderboard"].sort(key=lambda x: x["score"], reverse=True)
+
+        # Display leaderboard
+        st.subheader("Leaderboard")
+        if st.session_state.get("leaderboard"):
+            for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):  # Show top 5 scores
+                st.write(f"{rank}. {entry['username']}: {entry['score']}%")
+        else:
+            st.write("No scores yet.")
+
+        st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
+        return
+
+    answer_version = st.session_state.get("answer_version", 0)
 
     question = questions[current_question_idx]
     language = question.get("language", None) 
 
-    # Display current question
     with st.expander(f"Question {current_question_idx + 1}", expanded=True):
         if language:
-            st.code(question["question"], language=language)  # Use st.code() for code formatting
+            st.code(question['question'], language=language) 
         else:
             st.write(f"**{question['question']}**")
         options = question["options"]
 
-        # Clear selected option on rerun before getting user answer
         if st.session_state.get(f"answer_{current_question_idx}") is not None:
             st.session_state[f"answer_{current_question_idx}"] = None
 
         user_answer = st.radio(
             "Select an answer:",
             options=options,
-            key=f"answer_{current_question_idx}_{answer_version}",  # Unique key with version
+            key=f"answer_{current_question_idx}_{answer_version}"
         )
 
-    # Submit answer
     if st.button("Submit Question"):
         st.session_state["user_answers"][current_question_idx] = user_answer
         st.session_state["answered_questions"].append(current_question_idx)
         st.session_state["current_question"] += 1
-        st.session_state["answer_version"] = answer_version + 1  # Increment version on submit
+        st.session_state["answer_version"] += 1
         st.rerun()
 
     # Navigation buttons
@@ -385,12 +408,10 @@ def quiz_taker():
             st.session_state["current_question"] += 1
             st.rerun()
 
-    # Display submitted questions
     st.markdown(
         f'<div class="questions-submitted-card">Questions Submitted: {len(st.session_state["answered_questions"])} / {len(questions)}</div>',
         unsafe_allow_html=True,
     )
-
 # Main Landing Page Controller
 def main():
     if "page" not in st.session_state:
