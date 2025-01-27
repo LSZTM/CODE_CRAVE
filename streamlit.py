@@ -313,6 +313,24 @@ def quiz_taker():
 
     quiz_data = st.session_state["quiz_data"]
 
+    if "username" not in st.session_state:
+        st.session_state["username"] = ""
+
+    if not st.session_state["username"]:
+        st.title("Enter Your Username")
+        st.text_input("Username:", key="username")
+        if st.button("Start Quiz"):
+            if st.session_state["username"]:
+                st.session_state["current_question"] = 0  # Reset question index
+                st.session_state["user_answers"] = {}  # Reset user answers
+                st.session_state["answered_questions"] = []
+                st.session_state["answer_version"] = 0  # Reset answer version
+
+                st.experimental_rerun()  # Rerun the app to start the quiz
+            else:
+                st.warning("Please enter a username.")
+        return
+
     st.title(f"{quiz_data['title']}")
 
     current_question_idx = st.session_state["current_question"]
@@ -328,19 +346,15 @@ def quiz_taker():
         total_questions = len(questions)
         score_percentage = int((correct_answers / total_questions) * 100)
 
-        # Get username (you might want to use a more secure method for storing user data)
-        username = st.text_input("Enter your username:")
-
         # Update leaderboard (using a simple in-memory list for this example)
-        if username:
-            if "leaderboard" not in st.session_state:
-                st.session_state["leaderboard"] = []
+        if "leaderboard" not in st.session_state:
+            st.session_state["leaderboard"] = []
 
-            new_score = {"username": username, "score": score_percentage}
-            st.session_state["leaderboard"].append(new_score)
+        new_score = {"username": st.session_state["username"], "score": score_percentage}
+        st.session_state["leaderboard"].append(new_score)
 
-            # Sort leaderboard by score (descending)
-            st.session_state["leaderboard"].sort(key=lambda x: x["score"], reverse=True)
+        # Sort leaderboard by score (descending)
+        st.session_state["leaderboard"].sort(key=lambda x: x["score"], reverse=True)
 
         # Display leaderboard
         st.subheader("Leaderboard")
