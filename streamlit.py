@@ -307,9 +307,9 @@ def add_custom_styles():
 def quiz_taker():
     add_custom_styles()
 
-    quiz_data = load_quiz_data()
+    quiz_data = st.session_state["quiz_data"]
     if not quiz_data:
-        return
+        return "no quiz to attend"
 
     if "username" not in st.session_state:
         st.session_state["username"] = ""
