@@ -360,16 +360,46 @@ def quiz_taker():
         st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"])) 
 
         # Display leaderboard
+         correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
+        total_questions = len(questions)
+        score_percentage = int((correct_answers / total_questions) * 100)
+        elapsed_time = time.time() - st.session_state["start_time"] 
+
+        # Update leaderboard (using a simple in-memory list for this example)
+        if "leaderboard" not in st.session_state:
+            st.session_state["leaderboard"] = []
+
+        new_score = {"username": st.session_state["username"], 
+                    "score": score_percentage, 
+                    "time": elapsed_time}
+        st.session_state["leaderboard"].append(new_score)
+
+        # Sort leaderboard by score (descending)
+        st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"])) 
+
         st.subheader("Leaderboard")
-        if st.session_state.get("leaderboard"):
-            for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):  # Show top 5 scores
-                st.write(f"{rank}. {entry[st.session_state["username"]]}: {entry['score']}% - Time: {entry['time']:.2f} seconds")
-        else:
-            st.write("No scores yet.")
+        with st.expander("View Leaderboard"):
+            if st.session_state.get("leaderboard"):
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.write("Rank")
+                with col2:
+                    st.write("Username")
+                with col3:
+                    st.write("Score/Time")
+
+                for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):
+                    with col1:
+                        st.write(f"{rank}")
+                    with col2:
+                        st.write(f"{entry['username']}")
+                    with col3:
+                        st.write(f"{entry['score']}% - {entry['time']:.2f}s")
+            else:
+                st.write("No scores yet.")
 
         st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
         st.write(f"Time Taken: {elapsed_time:.2f} seconds")
-
         with st.expander("Quiz Summary"):
             for i, q in enumerate(questions):
                 answer = st.session_state["user_answers"].get(i, "Not Answered")
