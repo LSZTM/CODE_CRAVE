@@ -453,25 +453,138 @@ def quiz_taker():
         f'<div class="questions-submitted-card">Questions Submitted: {len(st.session_state["answered_questions"])} / {len(questions)}</div>',
         unsafe_allow_html=True,
     )
-# Main Landing Page Controller
+def add_landing_styles():
+    """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
+    st.markdown(
+        """
+        <style>
+        body {
+            background-color: #28282B; /* Set background color for the entire page */
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .landing-container {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            color: #fff; 
+            border: 2px solid #fff; /* Add a white border to the container */
+            border-radius: 10px; /* Add rounded corners to the container */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Add a subtle shadow */
+        }
+
+        .instructions {
+            font-size: 1.2rem; /* Increase font size for better visibility */
+            color: #fff; /* Set text color to white for contrast */
+            margin-bottom: 20px; 
+        }
+
+        .landing-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 0;
+            animation: fadeIn 2s ease forwards, typing 4s steps(40, end) 1s both, blink .5s step-end infinite;
+            font-family: 'Montserrat', sans-serif;
+            color: #FFFFFF;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #FFFFFF;
+            text-align : center;
+        }
+
+        .landing-subtitle {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            animation: fadeIn 3s ease forwards;
+            font-family: 'Montserrat', sans-serif;
+            color: #E3E3E3;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .instructions {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .instructions li {
+            margin-left: 20px; 
+        }
+
+        .instructions li span {
+            font-weight: bold; /* Make points bold */
+        }
+
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+def landing_page():
+    add_landing_styles()
+    st.markdown(
+        """
+        <h1 class="landing-title">CODE CRAVE '25</h1>
+        <h3 class="landing-subtitle">AN ULTIMATE QUIZ BATTLE</h3>
+
+        <div class="landing-container"> 
+            <p class="instructions">General Instructions:</p>
+            <ul class="instructions">
+                <li><span>1)</span> Any 2 sections are to be attempted from the given 3 sections</li>
+                <li><span>2)</span> From section 2 only one language is to be attempted</li>
+                <li><span>3)</span> All questions of an attempted section will be considered for marking</li>
+                <li><span>4)</span> If All 3 sections have been attempted, the best 2 will be considered</li>
+                <li><span>5)</span> Every question carries a weightage of 1 point</li>
+            </ul>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 def main():
     if "page" not in st.session_state:
-        st.session_state["page"] = "quiz_taker"
+        st.session_state["page"] = "landing_page"
 
     # Sidebar Navigation
     st.sidebar.title("Navigation")
-    menu = st.sidebar.radio("Go to", ["Quiz Taker", "Quiz Maker"])
-
-    if menu == "Quiz Taker":
+    menu = st.sidebar.radio("Go to", ["Landing Page", "Quiz Taker", "Quiz Maker"])
+    if menu == "Landing Page":
+        st.session_state["page"] = "landing_page"
+    elif menu == "Quiz Taker":
         st.session_state["page"] = "quiz_taker"
     elif menu == "Quiz Maker":
         st.session_state["page"] = "quiz_maker"
 
     # Display the page based on the session state
-    if st.session_state["page"] == "quiz_maker":
-        st.write("Quiz Maker Page is Under Construction!")  # Placeholder
+    if st.session_state["page"] == "landing_page":
+        landing_page()
     elif st.session_state["page"] == "quiz_taker":
         quiz_taker()
+    elif st.session_state["page"] == "quiz_maker":
+        quiz_maker()
+
+if __name__ == "__main__":
+    main()
 
 
 if __name__ == "__main__":
