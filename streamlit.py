@@ -305,7 +305,7 @@ def add_custom_styles():
 
 # Quiz Taker functionality
 def quiz_taker():
-    add_custom_styles()
+    add_custom_styles()  # Function to apply custom CSS styles
 
     quiz_data = st.session_state["quiz_data"]
     if not quiz_data:
@@ -324,9 +324,8 @@ def quiz_taker():
             if st.session_state["username"]:
                 st.session_state["current_question"] = 0
                 st.session_state["user_answers"] = {}
-                st.session_state["answered_questions"] = []
-                st.session_state["answer_version"] = 0
-                st.session_state["start_time"] = time.time() 
+                st.session_state["answered_questions"] = set()
+                st.session_state["start_time"] = time.time()
                 st.session_state["quiz_started"] = True
                 st.rerun()
             else:
@@ -338,121 +337,126 @@ def quiz_taker():
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
 
-    if current_question_idx >= len(questions):
-        st.success("Quiz Completed!")
+    # ✅ Fix: Quiz only completes when all questions are answered
+    if len(st.session_state["answered_questions"]) == len(questions):
+        st.write(f"Username: {st.session_state['username']}")
+        st.success("🎉 Quiz Completed! 🎉")
 
-        # Calculate score and elapsed time
         correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
         total_questions = len(questions)
         score_percentage = int((correct_answers / total_questions) * 100)
-        elapsed_time = time.time() - st.session_state["start_time"] 
+        elapsed_time = time.time() - st.session_state["start_time"]
 
-        # Update leaderboard (using a simple in-memory list for this example)
+        # ✅ Fix: Properly updating leaderboard
         if "leaderboard" not in st.session_state:
             st.session_state["leaderboard"] = []
 
-        new_score = {"username": st.session_state["username"], 
-                    "score": score_percentage, 
-                    "time": elapsed_time}
+        new_score = {
+            "username": st.session_state["username"],
+            "score": score_percentage,
+            "time": elapsed_time
+        }
         st.session_state["leaderboard"].append(new_score)
+        st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"]))
 
-        # Sort leaderboard by score (descending)
-        st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"])) 
+        # 🏆 Display leaderboard
+        st.subheader("🏆 Leaderboard")
 
-        # Display leaderboard
-        correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
-        total_questions = len(questions)
-        score_percentage = int((correct_answers / total_questions) * 100)
-        elapsed_time = time.time() - st.session_state["start_time"] 
+        if not st.session_state["leaderboard"]:
+            st.info("No scores yet. Be the first to take the quiz!")
+        else:
+            leaderboard_md = """
+            <style>
+                .leaderboard-table { width: 100%; border-collapse: collapse; }
+                .leaderboard-table th, .leaderboard-table td { 
+                    border: 1px solid #ddd; 
+                    padding: 8px; 
+                    text-align: center; 
+                    color: black;
+                }
+                .leaderboard-table th { background-color: #51789D; color: white; }
+                .leaderboard-row:nth-child(odd) { background-color: #f2f2f2; }
+            </style>
+            <table class="leaderboard-table">
+            <thead>
+                <tr><th>🏅 Rank</th><th>👤 Username</th><th>🎯 Score (%)</th><th>⏱ Time (s)</th></tr>
+            </thead>
+            <tbody>  """
 
-        # Update leaderboard (using a simple in-memory list for this example)
-        if "leaderboard" not in st.session_state:
-            st.session_state["leaderboard"] = []
+            for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):
+                leaderboard_md += f"""<tr class="leaderboard-row"><td><b>{rank}</b></td><td>{entry['username']}</td><td>{entry['score']}%</td><td>{entry['time']:.2f}</td></tr>"""
 
-        new_score = {"username": st.session_state["username"], 
-                    "score": score_percentage, 
-                    "time": elapsed_time}
-        st.session_state["leaderboard"].append(new_score)
+            leaderboard_md += """
+            </tbody>  </table>
+            """
+            st.markdown(leaderboard_md, unsafe_allow_html=True)
 
-        # Sort leaderboard by score (descending)
-        st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"])) 
+            # 📜 Display Summary
+            st.write(f"**Your Score:** {correct_answers}/{total_questions} ({score_percentage}%)")
+            st.write(f"**Time Taken:** {elapsed_time:.2f} seconds")
 
-        st.subheader("Leaderboard")
-        with st.expander("View Leaderboard"):
-            if st.session_state.get("leaderboard"):
-                col1, col2, col3 = st.columns(3)
-                with col1:
-                    st.write("Rank")
-                with col2:
-                    st.write("Username")
-                with col3:
-                    st.write("Score/Time")
+            with st.expander("📜 Quiz Summary"):
+                for i, q in enumerate(questions):
+                    user_answer = st.session_state["user_answers"].get(i, "Not Answered")
+                    correct_option = q["correct_option"]
+                    correct_answer = questions[i]["options"][correct_option]
+                    st.write(f"**Q{i + 1}:** {q['question']}")
+                    st.write(f"**Your Answer:** {user_answer}")
+                    st.write(f"✅ **Correct Answer:** {correct_answer}")
 
-                for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):
-                    with col1:
-                        st.write(f"{rank}")
-                    with col2:
-                        st.write(f"{entry['username']}")
-                    with col3:
-                        st.write(f"{entry['score']}% - {entry['time']:.2f}s")
-            else:
-                st.write("No scores yet.")
+            return  # ✅ Exit early once quiz is complete
 
-        st.write(f"Your Score: {correct_answers}/{total_questions} ({score_percentage}%)")
-        st.write(f"Time Taken: {elapsed_time:.2f} seconds")
-        with st.expander("Quiz Summary"):
-            for i, q in enumerate(questions):
-                answer = st.session_state["user_answers"].get(i, "Not Answered")
-                correct_option = q["correct_option"]
-                option_text = questions[i]["options"][correct_option]
-                st.write(f"Q{i + 1}: {q['question']}")
-                st.write(f"Your Answer: {answer}")
-                st.write(f"Correct Answer: {option_text}")
-        return
-
-    answer_version = st.session_state.get("answer_version", 0)
-
+    # 📝 Display current question
     question = questions[current_question_idx]
-    language = question.get("language", None) 
+    language = question.get("language", None)
 
-    with st.expander(f"Question {current_question_idx + 1}", expanded=True):
+    with st.expander(f"❓ Question {current_question_idx + 1}", expanded=True):
         if language:
-            st.code(question['question'], language=language) 
+            st.code(question['question'], language=language)
         else:
             st.write(f"**{question['question']}**")
-        options = question["options"]
 
-        if st.session_state.get(f"answer_{current_question_idx}") is not None:
-            st.session_state[f"answer_{current_question_idx}"] = None
+        options = ["Select an answer"] + question["options"]
+        user_answer = st.radio("Select an answer:", options=options, index=0, key=f"answer_{current_question_idx}")
 
-        user_answer = st.radio(
-            "Select an answer:",
-            options=options,
-            key=f"answer_{current_question_idx}_{answer_version}"
-        )
+    # 🚨 Prevent submission if "Select an answer" is chosen
+    submit_disabled = user_answer == "Select an answer" or current_question_idx in st.session_state["answered_questions"]
 
-    if st.button("Submit Question"):
-        st.session_state["user_answers"][current_question_idx] = user_answer
-        st.session_state["answered_questions"].append(current_question_idx)
-        st.session_state["current_question"] += 1
-        st.session_state["answer_version"] += 1
+    if submit_disabled:
+        if user_answer == "Select an answer":
+            st.warning("⚠️ Please select an option before submitting.")
+        elif current_question_idx in st.session_state["answered_questions"]:
+            st.info("✅ You have already submitted this question.")
+
+    if st.button("✅ Submit Answer", disabled=submit_disabled):
+        if user_answer != "Select an answer":
+            st.session_state["user_answers"][current_question_idx] = user_answer
+            st.session_state["answered_questions"].add(current_question_idx)
+
+        # ✅ Move to next unanswered question
+        next_question = next((i for i in range(len(questions)) if i not in st.session_state["answered_questions"]), None)
+        st.session_state["current_question"] = next_question if next_question is not None else len(questions)
+
         st.rerun()
 
-    # Navigation buttons
+    # ⬅➡ Navigation buttons
     col1, col2 = st.columns(2)
-    with col1:
-        if st.button("← Previous Question") and current_question_idx > 0:
-            st.session_state["current_question"] -= 1
-            st.rerun()
-    with col2:
-        if st.button("Next Question →") and current_question_idx < len(questions) - 1:
-            st.session_state["current_question"] += 1
-            st.rerun()
 
-    st.markdown(
-        f'<div class="questions-submitted-card">Questions Submitted: {len(st.session_state["answered_questions"])} / {len(questions)}</div>',
-        unsafe_allow_html=True,
-    )
+    with col1:
+        if current_question_idx > 0:
+            if st.button("⬅ Previous Question"):
+                st.session_state["current_question"] -= 1
+                st.rerun()
+
+    with col2:
+        if current_question_idx < len(questions) - 1:
+            if st.button("Next Question ➡"):
+                st.session_state["current_question"] += 1
+                st.rerun()
+
+    # 📌 Track progress
+    st.markdown(f'<div class="questions-submitted-card">📌 Questions Submitted: {len(st.session_state["answered_questions"])} / {len(questions)}</div>', unsafe_allow_html=True)
+
 def add_landing_styles():
     """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
     st.markdown(
