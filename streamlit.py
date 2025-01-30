@@ -304,107 +304,125 @@ def add_custom_styles():
 
 
 # Quiz Taker functionality
+import streamlit as st
+import pandas as pd
+import time
+import os
+
+LEADERBOARD_FILE = "leaderboard.csv"
+
+def load_leaderboard():
+    """Loads leaderboard from a CSV file if it exists."""
+    if os.path.exists(LEADERBOARD_FILE):
+        return pd.read_csv(LEADERBOARD_FILE).to_dict(orient="records")
+    return []
+
+def save_leaderboard():
+    """Saves leaderboard to a CSV file."""
+    leaderboard_df = pd.DataFrame(st.session_state["leaderboard"])
+    leaderboard_df.to_csv(LEADERBOARD_FILE, index=False)
+
 def quiz_taker():
     add_custom_styles()  # Function to apply custom CSS styles
 
-    quiz_data = st.session_state["quiz_data"]
+    quiz_data = st.session_state.get("quiz_data", {})
     if not quiz_data:
         return
-
+    
     if "username" not in st.session_state:
         st.session_state["username"] = ""
 
     if "quiz_started" not in st.session_state:
         st.session_state["quiz_started"] = False
 
+    # ✅ Load leaderboard from file at startup
+    if "leaderboard" not in st.session_state:
+        st.session_state["leaderboard"] = load_leaderboard()
+
+    # Check if user has already completed the quiz
+    def has_completed_quiz(username):
+        return any(entry["username"] == username for entry in st.session_state["leaderboard"])
+
+    # 👤 Username input
     if not st.session_state["quiz_started"]:
         st.title("Enter Your Username")
-        st.text_input("Username:", key="username")
+
+        username = st.text_input("Enter your username:", value=st.session_state["username"], key="username_input")
+        
         if st.button("Start Quiz"):
-            if st.session_state["username"]:
-                st.session_state["current_question"] = 0
-                st.session_state["user_answers"] = {}
-                st.session_state["answered_questions"] = set()
-                st.session_state["start_time"] = time.time()
-                st.session_state["quiz_started"] = True
-                st.rerun()
-            else:
-                st.warning("Please enter a username.")
+            if not username.strip():
+                st.warning("⚠️ Please enter a valid username.")
+                return
+            
+            if has_completed_quiz(username):
+                st.error("❌ You have already completed the quiz! You cannot retake it.")
+                return
+
+            st.session_state["username"] = username
+            st.session_state["current_question"] = 0
+            st.session_state["user_answers"] = {}
+            st.session_state["answered_questions"] = set()
+            st.session_state["start_time"] = time.time()
+            st.session_state["quiz_started"] = True
+            st.rerun()
         return
 
     st.title(f"{quiz_data['title']}")
+    
+    # Display username
+    st.write(f"**Username:** {st.session_state['username']}")
 
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
 
-    # ✅ Fix: Quiz only completes when all questions are answered
+    # ✅ Check if the quiz is completed
     if len(st.session_state["answered_questions"]) == len(questions):
-        st.write(f"Username: {st.session_state['username']}")
         st.success("🎉 Quiz Completed! 🎉")
 
-        correct_answers = sum(q["correct_option"] == a for q, a in zip(questions, st.session_state["user_answers"].values()))
+        correct_answers = sum(1 for i, q in enumerate(questions) if st.session_state["user_answers"].get(i, None) == q["options"][q["correct_option"]])
+
         total_questions = len(questions)
         score_percentage = int((correct_answers / total_questions) * 100)
         elapsed_time = time.time() - st.session_state["start_time"]
 
-        # ✅ Fix: Properly updating leaderboard
-        if "leaderboard" not in st.session_state:
-            st.session_state["leaderboard"] = []
+        # ✅ Prevent duplicate entries in leaderboard
+        if not has_completed_quiz(st.session_state["username"]):
+            st.session_state["leaderboard"].append({
+                "username": st.session_state["username"],
+                "score": score_percentage,
+                "time": elapsed_time
+            })
+            save_leaderboard()  # ✅ Save leaderboard after updating
 
-        new_score = {
-            "username": st.session_state["username"],
-            "score": score_percentage,
-            "time": elapsed_time
-        }
-        st.session_state["leaderboard"].append(new_score)
+        # Sort leaderboard (Higher score first, then lower time)
         st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"]))
 
-        # 🏆 Display leaderboard
+        # 🏆 Display leaderboard using Pandas DataFrame
         st.subheader("🏆 Leaderboard")
 
-        if not st.session_state["leaderboard"]:
-            st.info("No scores yet. Be the first to take the quiz!")
+        if st.session_state["leaderboard"]:
+            leaderboard_df = pd.DataFrame(st.session_state["leaderboard"])
+            leaderboard_df = leaderboard_df.sort_values(by=["score", "time"], ascending=[False, True])
+            leaderboard_df.index = leaderboard_df.index + 1  # Rank starts from 1
+
+            st.dataframe(leaderboard_df, use_container_width=True, column_config={
+                "username": "👤 Username",
+                "score": "🎯 Score (%)",
+                "time": "⏱ Time (s)"
+            })
         else:
-            leaderboard_md = """
-            <style>
-                .leaderboard-table { width: 100%; border-collapse: collapse; }
-                .leaderboard-table th, .leaderboard-table td { 
-                    border: 1px solid #ddd; 
-                    padding: 8px; 
-                    text-align: center; 
-                    color: black;
-                }
-                .leaderboard-table th { background-color: #51789D; color: white; }
-                .leaderboard-row:nth-child(odd) { background-color: #f2f2f2; }
-            </style>
-            <table class="leaderboard-table">
-            <thead>
-                <tr><th>🏅 Rank</th><th>👤 Username</th><th>🎯 Score (%)</th><th>⏱ Time (s)</th></tr>
-            </thead>
-            <tbody>  """
+            st.write("No players on the leaderboard yet.") 
 
-            for rank, entry in enumerate(st.session_state["leaderboard"][:5], start=1):
-                leaderboard_md += f"""<tr class="leaderboard-row"><td><b>{rank}</b></td><td>{entry['username']}</td><td>{entry['score']}%</td><td>{entry['time']:.2f}</td></tr>"""
+        with st.expander("📜 Quiz Summary"):
+            for i, q in enumerate(questions):
+                user_answer = st.session_state["user_answers"].get(i, "Not Answered")
+                correct_option = q["correct_option"]
+                correct_answer = questions[i]["options"][correct_option]
+                st.write(f"**Q{i + 1}:** {q['question']}")
+                st.write(f"**Your Answer:** {user_answer}")
+                st.write(f"✅ **Correct Answer:** {correct_answer}")
 
-            leaderboard_md += """
-            </tbody>  </table>
-            """
-            st.markdown(leaderboard_md, unsafe_allow_html=True)
-
-            # 📜 Display Summary
-            st.write(f"**Your Score:** {correct_answers}/{total_questions} ({score_percentage}%)")
-            st.write(f"**Time Taken:** {elapsed_time:.2f} seconds")
-
-            with st.expander("📜 Quiz Summary"):
-                for i, q in enumerate(questions):
-                    user_answer = st.session_state["user_answers"].get(i, "Not Answered")
-                    correct_option = q["correct_option"]
-                    correct_answer = questions[i]["options"][correct_option]
-                    st.write(f"**Q{i + 1}:** {q['question']}")
-                    st.write(f"**Your Answer:** {user_answer}")
-                    st.write(f"✅ **Correct Answer:** {correct_answer}")
-
-            return  # ✅ Exit early once quiz is complete
+        return  # ✅ Exit early once quiz is complete
 
     # 📝 Display current question
     question = questions[current_question_idx]
@@ -456,6 +474,7 @@ def quiz_taker():
 
     # 📌 Track progress
     st.markdown(f'<div class="questions-submitted-card">📌 Questions Submitted: {len(st.session_state["answered_questions"])} / {len(questions)}</div>', unsafe_allow_html=True)
+
 
 def add_landing_styles():
     """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
@@ -589,6 +608,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
