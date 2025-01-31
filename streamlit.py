@@ -479,7 +479,7 @@ def quiz_taker():
             emails = s.get_receiver_add()
             selected_email = st.selectbox("Select your email for the certificate:", emails)
             names = [entry["username"] for entry in st.session_state["leaderboard"]]
-            selected_name = st.selectbox("find your name:", names)
+            selected_name = st.selectbox("Select your name:", names)
             if selected_name and selected_email:
                  if certificate_button:
                     certificate = s.get_certificate(selected_email)
