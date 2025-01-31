@@ -301,13 +301,11 @@ def add_custom_styles():
 
 
 
-
+import requests
 
 # Quiz Taker functionality
-import streamlit as st
-import pandas as pd
-import time
 import requests
+import pandas as pd  # Importing pandas for DataFrame
 
 # Airtable API Credentials
 AIRTABLE_API_KEY = "pat3iS2qBn8ieAsKb.c9f71a1d00093034e336d13e96ee87eacf14cc8fb8ca4cccd221d8184a302aa5"  # Replace with your API Key
@@ -332,29 +330,49 @@ def update_leaderboard(username, score, elapsed_time):
             }
         ]
     }
-    requests.post(url, json=data, headers=headers)
+    
+    # Send POST request to Airtable API
+    response = requests.post(url, json=data, headers=headers)
+
+    # Check if the request was successful
+    if response.status_code == 201:
+        print("Record added successfully.")
+    else:
+        print(f"Failed to add record. Status code: {response.status_code}")
+        print(response.json())  # Optional: print the error details
 
 # Function to retrieve global leaderboard
 def get_leaderboard():
     url = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_NAME}"
     headers = {"Authorization": f"Bearer {AIRTABLE_API_KEY}"}
+
+    # Send GET request to Airtable API
     response = requests.get(url, headers=headers)
-    
-    records = response.json().get("records", [])
 
-    leaderboard_data = []
-    for record in records:
-        fields = record.get("fields", {})
-        leaderboard_data.append({
-            "username": fields.get("username", "Unknown"),
-            "score": fields.get("score", 0),  # Default to 0 if missing
-            "time": fields.get("time", 9999)  # Default to high value for sorting
-        })
+    if response.status_code == 200:
+        # Parse the response and return the records
+        records = response.json().get("records", [])
+        leaderboard_data = []
 
-    if leaderboard_data:
-        return pd.DataFrame(leaderboard_data).sort_values(by=["score", "time"], ascending=[False, True])
+        # Format records into a more readable form
+        for record in records:
+            fields = record.get("fields", {})
+            leaderboard_data.append({
+                "username": fields.get("username", "Unknown"),
+                "score": fields.get("score", 0),
+                "time": fields.get("time", 0)
+            })
+
+        # Create DataFrame and sort by score (descending) and time (ascending)
+        if leaderboard_data:
+            leaderboard_df = pd.DataFrame(leaderboard_data)
+            leaderboard_df = leaderboard_df.sort_values(by=["score", "time"], ascending=[False, True])
+            return leaderboard_df
+        else:
+            return pd.DataFrame(columns=["username", "score", "time"])  # Return empty DataFrame if no data
     else:
-        return pd.DataFrame(columns=["username", "score", "time"])  # Return empty dataframe
+        print(f"Failed to fetch leaderboard. Status code: {response.status_code}")
+        return pd.DataFrame(columns=["username", "score", "time"]) 
 
 
 def quiz_taker():
