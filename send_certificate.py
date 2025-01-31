@@ -10,7 +10,7 @@ email_password = st.secrets["email"]["email_password"]
 # Function to get the receiver's email from the configuration file
 def get_receiver_add():
     try:
-        with open("C:\\Users\\vnaad\\OneDrive\\Desktop\\code-crave\\config.txt") as f:
+        with open("config.txt") as f:
             emails = [i for i in f.read().split('\n')] 
             return emails
     except FileNotFoundError:
@@ -20,7 +20,7 @@ def get_receiver_add():
 # Function to get the log file path
 import os
 
-def get_certificate(name, certificate_dir="C:\\Users\\vnaad\\OneDrive\\Desktop\\certificates"):
+def get_certificate(name, certificate_dir="certificates"):
     """
     Function to get the path of the certificate for a given name.
 
