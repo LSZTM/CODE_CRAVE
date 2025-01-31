@@ -339,10 +339,23 @@ def get_leaderboard():
     url = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_NAME}"
     headers = {"Authorization": f"Bearer {AIRTABLE_API_KEY}"}
     response = requests.get(url, headers=headers)
+    
     records = response.json().get("records", [])
 
-    leaderboard_data = [{"username": r["fields"]["username"], "score": r["fields"]["score"], "time": r["fields"]["time"]} for r in records]
-    return pd.DataFrame(leaderboard_data).sort_values(by=["score", "time"], ascending=[False, True])
+    leaderboard_data = []
+    for record in records:
+        fields = record.get("fields", {})
+        leaderboard_data.append({
+            "username": fields.get("username", "Unknown"),
+            "score": fields.get("score", 0),  # Default to 0 if missing
+            "time": fields.get("time", 9999)  # Default to high value for sorting
+        })
+
+    if leaderboard_data:
+        return pd.DataFrame(leaderboard_data).sort_values(by=["score", "time"], ascending=[False, True])
+    else:
+        return pd.DataFrame(columns=["username", "score", "time"])  # Return empty dataframe
+
 
 def quiz_taker():
     add_custom_styles()  # Function to apply custom CSS styles
