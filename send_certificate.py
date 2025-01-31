@@ -21,7 +21,8 @@ def get_receiver_add():
 import os
 
 def get_names(certificate_dir="certificates"):
-    certificate_files = [file for file in certificate_dir ]
+    certificate_dir_path = os.path.join(os.getcwd(), certificate_dir)
+    certificate_files = [file for file in certificate_dir_path ]
     return certificate_files
     
 
@@ -40,7 +41,9 @@ def get_certificate(name, certificate_dir="certificates"):
     certificate_filename = f"{name}.pdf"  # Assuming certificates are in PDF format
 
     # Construct the full path to the certificate
+    certificate_dir_path = os.path.join(os.getcwd(), certificate_dir)
     certificate_path = os.path.join(certificate_dir, certificate_filename)
+    
 
     # Check if the certificate exists in the specified directory
     if os.path.exists(certificate_path):
