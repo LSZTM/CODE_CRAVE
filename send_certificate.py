@@ -32,8 +32,8 @@ def get_certificate(name, certificate_dir="certificates"):
 # Function to send the email with the provided details
 def send_mail(certificate, receiver_add):
     # Retrieve sensitive data like email address and password from Streamlit secrets
-    email_address = st.secrets["email_address"]
-    email_password = st.secrets["email_password"]
+    email_address = st.secrets["cortexoa@gmail.com"]
+    email_password = st.secrets["rdhrxsyuvujnglta"]
     
     # Set up the email parameters
     message = MIMEMultipart()
