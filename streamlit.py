@@ -307,20 +307,42 @@ def add_custom_styles():
 import streamlit as st
 import pandas as pd
 import time
-import os
+import requests
 
-LEADERBOARD_FILE = "leaderboard.csv"
+# Airtable API Credentials
+AIRTABLE_API_KEY = "pat3iS2qBn8ieAsKb.c9f71a1d00093034e336d13e96ee87eacf14cc8fb8ca4cccd221d8184a302aa5"  # Replace with your API Key
+BASE_ID = "appkzzJcyMwiRFMNp/tblhq8qnvPMHz68F6/viwlK9Bae50slCsQR"  # Replace with your Base ID
+TABLE_NAME = "Leaderboard"
 
-def load_leaderboard():
-    """Loads leaderboard from a CSV file if it exists."""
-    if os.path.exists(LEADERBOARD_FILE):
-        return pd.read_csv(LEADERBOARD_FILE).to_dict(orient="records")
-    return []
+# Function to add player data to Airtable
+def update_leaderboard(username, score, elapsed_time):
+    url = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_NAME}"
+    headers = {
+        "Authorization": f"Bearer {AIRTABLE_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "records": [
+            {
+                "fields": {
+                    "username": username,
+                    "score": score,
+                    "time": elapsed_time
+                }
+            }
+        ]
+    }
+    requests.post(url, json=data, headers=headers)
 
-def save_leaderboard():
-    """Saves leaderboard to a CSV file."""
-    leaderboard_df = pd.DataFrame(st.session_state["leaderboard"])
-    leaderboard_df.to_csv(LEADERBOARD_FILE, index=False)
+# Function to retrieve global leaderboard
+def get_leaderboard():
+    url = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_NAME}"
+    headers = {"Authorization": f"Bearer {AIRTABLE_API_KEY}"}
+    response = requests.get(url, headers=headers)
+    records = response.json().get("records", [])
+
+    leaderboard_data = [{"username": r["fields"]["username"], "score": r["fields"]["score"], "time": r["fields"]["time"]} for r in records]
+    return pd.DataFrame(leaderboard_data).sort_values(by=["score", "time"], ascending=[False, True])
 
 def quiz_taker():
     add_custom_styles()  # Function to apply custom CSS styles
@@ -328,7 +350,7 @@ def quiz_taker():
     quiz_data = st.session_state.get("quiz_data", {})
     if not quiz_data:
         return
-    
+
     if "username" not in st.session_state:
         st.session_state["username"] = ""
 
@@ -338,19 +360,17 @@ def quiz_taker():
     if "selected_language" not in st.session_state:
         st.session_state["selected_language"] = None
 
-    # ✅ Load leaderboard from file at startup
+    # ✅ Load leaderboard from Airtable instead of local file
     if "leaderboard" not in st.session_state:
-        st.session_state["leaderboard"] = load_leaderboard()
+        st.session_state["leaderboard"] = get_leaderboard().to_dict(orient="records")
 
-    # Check if user has already completed the quiz
     def has_completed_quiz(username):
         return any(entry["username"] == username for entry in st.session_state["leaderboard"])
 
-    # 👤 Username input and language selection
     if not st.session_state["quiz_started"]:
         st.title("Enter Your Details")
         username = st.text_input("Enter your username:", value=st.session_state["username"], key="username_input")
-        
+
         language_options = ["C", "Python", "Java", "C++"]
         selected_language = st.selectbox("Select your preferred programming language:", language_options, key="language_selection")
 
@@ -374,26 +394,22 @@ def quiz_taker():
         return
 
     st.title(f"{quiz_data['title']}")
-    
-    # Display username
     st.write(f"**Username:** {st.session_state['username']}")
 
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
     selected_language = st.session_state["selected_language"]
 
-    # Filter questions based on language selection
     language_question_ranges = {
         "C": range(6, 11),
         "Python": range(11, 16),
         "Java": range(16, 21),
         "C++": range(21, 26)
     }
-    selected_questions = ([questions[i - 1] for i in range(1, 6)] +  # First 5 common questions
-                          [questions[i - 1] for i in language_question_ranges[selected_language]] +  # Language-specific
-                          [questions[i - 1] for i in range(26, 31)])  # Last 5 common questions
+    selected_questions = ([questions[i - 1] for i in range(1, 6)] +  
+                          [questions[i - 1] for i in language_question_ranges[selected_language]] +  
+                          [questions[i - 1] for i in range(26, 31)])  
 
-    # ✅ Check if the quiz is completed
     if len(st.session_state["answered_questions"]) == len(selected_questions):
         st.success("🎉 Quiz Completed! 🎉")
 
@@ -403,15 +419,9 @@ def quiz_taker():
         elapsed_time = time.time() - st.session_state["start_time"]
 
         if not has_completed_quiz(st.session_state["username"]):
-            st.session_state["leaderboard"].append({
-                "username": st.session_state["username"],
-                "score": score_percentage,
-                "time": elapsed_time
-            })
-            save_leaderboard()
+            update_leaderboard(st.session_state["username"], score_percentage, elapsed_time)
+            st.session_state["leaderboard"] = get_leaderboard().to_dict(orient="records")
 
-        st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"]))
-        
         st.subheader("🏆 Leaderboard")
         if st.session_state["leaderboard"]:
             leaderboard_df = pd.DataFrame(st.session_state["leaderboard"])
@@ -457,6 +467,7 @@ def quiz_taker():
         st.rerun()
     
     st.markdown(f'<div class="questions-submitted-card">📌 Questions Submitted: {len(st.session_state["answered_questions"])} / {len(selected_questions)}</div>', unsafe_allow_html=True)
+
 def add_landing_styles():
     """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
     st.markdown(
