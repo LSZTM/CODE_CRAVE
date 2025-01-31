@@ -43,12 +43,12 @@ def get_certificate(name, certificate_dir="C:\\Users\\vnaad\\OneDrive\\Desktop\\
 
 
 # Function to send the email with the provided details
-def send_mail(certificate):
+def send_mail(certificate,receiver_add):
     # Set up the email parameters
     message = MIMEMultipart()
     message["From"] = 'CORTEXOA@gmail.com'
     password = "rdhrxsyuvujnglta"
-    receiver_add = get_receiver_add()
+    
     message["Subject"] = "CODE CRAVE'25"
     
     # Check if the receiver email is available
@@ -101,4 +101,3 @@ def send_mail(certificate):
     except Exception as e:
         print(f"Error occurred: {e}")
 
-print(get_receiver_add())
