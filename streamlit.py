@@ -335,6 +335,9 @@ def quiz_taker():
     if "quiz_started" not in st.session_state:
         st.session_state["quiz_started"] = False
 
+    if "selected_language" not in st.session_state:
+        st.session_state["selected_language"] = None
+
     # ✅ Load leaderboard from file at startup
     if "leaderboard" not in st.session_state:
         st.session_state["leaderboard"] = load_leaderboard()
@@ -343,12 +346,14 @@ def quiz_taker():
     def has_completed_quiz(username):
         return any(entry["username"] == username for entry in st.session_state["leaderboard"])
 
-    # 👤 Username input
+    # 👤 Username input and language selection
     if not st.session_state["quiz_started"]:
-        st.title("Enter Your Username")
-
+        st.title("Enter Your Details")
         username = st.text_input("Enter your username:", value=st.session_state["username"], key="username_input")
         
+        language_options = ["C", "Python", "Java", "C++"]
+        selected_language = st.selectbox("Select your preferred programming language:", language_options, key="language_selection")
+
         if st.button("Start Quiz"):
             if not username.strip():
                 st.warning("⚠️ Please enter a valid username.")
@@ -359,6 +364,7 @@ def quiz_taker():
                 return
 
             st.session_state["username"] = username
+            st.session_state["selected_language"] = selected_language
             st.session_state["current_question"] = 0
             st.session_state["user_answers"] = {}
             st.session_state["answered_questions"] = set()
@@ -374,36 +380,43 @@ def quiz_taker():
 
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
+    selected_language = st.session_state["selected_language"]
+
+    # Filter questions based on language selection
+    language_question_ranges = {
+        "C": range(6, 11),
+        "Python": range(11, 16),
+        "Java": range(16, 21),
+        "C++": range(21, 26)
+    }
+    selected_questions = ([questions[i - 1] for i in range(1, 6)] +  # First 5 common questions
+                          [questions[i - 1] for i in language_question_ranges[selected_language]] +  # Language-specific
+                          [questions[i - 1] for i in range(26, 31)])  # Last 5 common questions
 
     # ✅ Check if the quiz is completed
-    if len(st.session_state["answered_questions"]) == len(questions):
+    if len(st.session_state["answered_questions"]) == len(selected_questions):
         st.success("🎉 Quiz Completed! 🎉")
 
-        correct_answers = sum(1 for i, q in enumerate(questions) if st.session_state["user_answers"].get(i, None) == q["options"][q["correct_option"]])
-
-        total_questions = len(questions)
+        correct_answers = sum(1 for i, q in enumerate(selected_questions) if st.session_state["user_answers"].get(i, None) == q["options"][q["correct_option"]])
+        total_questions = len(selected_questions)
         score_percentage = int((correct_answers / total_questions) * 100)
         elapsed_time = time.time() - st.session_state["start_time"]
 
-        # ✅ Prevent duplicate entries in leaderboard
         if not has_completed_quiz(st.session_state["username"]):
             st.session_state["leaderboard"].append({
                 "username": st.session_state["username"],
                 "score": score_percentage,
                 "time": elapsed_time
             })
-            save_leaderboard()  # ✅ Save leaderboard after updating
+            save_leaderboard()
 
-        # Sort leaderboard (Higher score first, then lower time)
         st.session_state["leaderboard"].sort(key=lambda x: (-x["score"], x["time"]))
-
-        # 🏆 Display leaderboard using Pandas DataFrame
+        
         st.subheader("🏆 Leaderboard")
-
         if st.session_state["leaderboard"]:
             leaderboard_df = pd.DataFrame(st.session_state["leaderboard"])
             leaderboard_df = leaderboard_df.sort_values(by=["score", "time"], ascending=[False, True])
-            leaderboard_df.index = leaderboard_df.index + 1  # Rank starts from 1
+            leaderboard_df.index = leaderboard_df.index + 1
 
             st.dataframe(leaderboard_df, use_container_width=True, column_config={
                 "username": "👤 Username",
@@ -412,22 +425,20 @@ def quiz_taker():
             })
         else:
             st.write("No players on the leaderboard yet.") 
-
+        
         with st.expander("📜 Quiz Summary"):
-            for i, q in enumerate(questions):
+            for i, q in enumerate(selected_questions):
                 user_answer = st.session_state["user_answers"].get(i, "Not Answered")
                 correct_option = q["correct_option"]
-                correct_answer = questions[i]["options"][correct_option]
+                correct_answer = q["options"][correct_option]
                 st.write(f"**Q{i + 1}:** {q['question']}")
                 st.write(f"**Your Answer:** {user_answer}")
                 st.write(f"✅ **Correct Answer:** {correct_answer}")
+        return
 
-        return  # ✅ Exit early once quiz is complete
-
-    # 📝 Display current question
-    question = questions[current_question_idx]
+    question = selected_questions[current_question_idx]
     language = question.get("language", None)
-
+    
     with st.expander(f"❓ Question {current_question_idx + 1}", expanded=True):
         if language:
             st.code(question['question'], language=language)
@@ -437,45 +448,15 @@ def quiz_taker():
         options = ["Select an answer"] + question["options"]
         user_answer = st.radio("Select an answer:", options=options, index=0, key=f"answer_{current_question_idx}")
 
-    # 🚨 Prevent submission if "Select an answer" is chosen
     submit_disabled = user_answer == "Select an answer" or current_question_idx in st.session_state["answered_questions"]
-
-    if submit_disabled:
-        if user_answer == "Select an answer":
-            st.warning("⚠️ Please select an option before submitting.")
-        elif current_question_idx in st.session_state["answered_questions"]:
-            st.info("✅ You have already submitted this question.")
-
     if st.button("✅ Submit Answer", disabled=submit_disabled):
         if user_answer != "Select an answer":
             st.session_state["user_answers"][current_question_idx] = user_answer
             st.session_state["answered_questions"].add(current_question_idx)
-
-        # ✅ Move to next unanswered question
-        next_question = next((i for i in range(len(questions)) if i not in st.session_state["answered_questions"]), None)
-        st.session_state["current_question"] = next_question if next_question is not None else len(questions)
-
+        st.session_state["current_question"] += 1
         st.rerun()
-
-    # ⬅➡ Navigation buttons
-    col1, col2 = st.columns(2)
-
-    with col1:
-        if current_question_idx > 0:
-            if st.button("⬅ Previous Question"):
-                st.session_state["current_question"] -= 1
-                st.rerun()
-
-    with col2:
-        if current_question_idx < len(questions) - 1:
-            if st.button("Next Question ➡"):
-                st.session_state["current_question"] += 1
-                st.rerun()
-
-    # 📌 Track progress
-    st.markdown(f'<div class="questions-submitted-card">📌 Questions Submitted: {len(st.session_state["answered_questions"])} / {len(questions)}</div>', unsafe_allow_html=True)
-
-
+    
+    st.markdown(f'<div class="questions-submitted-card">📌 Questions Submitted: {len(st.session_state["answered_questions"])} / {len(selected_questions)}</div>', unsafe_allow_html=True)
 def add_landing_styles():
     """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
     st.markdown(
