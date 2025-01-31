@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 import time
-
+import send_certificate as s
 # Initialize session state for keys that may not exist
 if "questions" not in st.session_state:
     st.session_state["questions"] = []
@@ -302,9 +302,6 @@ def add_custom_styles():
 
 
 import requests
-
-# Quiz Taker functionality
-import requests
 import pandas as pd  # Importing pandas for DataFrame
 
 # Airtable API Credentials
@@ -475,6 +472,22 @@ def quiz_taker():
                 st.write(f"**Q{i + 1}:** {q['question']}")
                 st.write(f"**Your Answer:** {user_answer}")
                 st.write(f"✅ **Correct Answer:** {correct_answer}")
+
+        # Show Generate Certificate button and dropdown list after quiz completion
+        with st.expander("🎓 Generate Certificate"):
+            certificate_button = st.button("Generate Certificate")
+            if certificate_button:
+                # List of names available for certificates, taken from the leaderboard
+                names = [entry["username"] for entry in st.session_state["leaderboard"]]
+                selected_name = st.selectbox("Select your name for the certificate:", names)
+                if selected_name:
+                    emails = s.get_reciever_add()
+                    selected_email = st.selectbox("Select your name for the certificate:", emails)
+                    certificate = s.get_certificate(selected_email)
+                    s.send_mail(certificate,selected_email)
+                    st.success(f"Certificate generated for {selected_name}!")
+                    
+        
         return
 
     question = selected_questions[current_question_idx]
@@ -496,8 +509,9 @@ def quiz_taker():
             st.session_state["answered_questions"].add(current_question_idx)
         st.session_state["current_question"] += 1
         st.rerun()
-    
+
     st.markdown(f'<div class="questions-submitted-card">📌 Questions Submitted: {len(st.session_state["answered_questions"])} / {len(selected_questions)}</div>', unsafe_allow_html=True)
+
 
 def add_landing_styles():
     """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
