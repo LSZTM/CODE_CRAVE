@@ -477,11 +477,11 @@ def quiz_taker():
         with st.expander("🎓 Generate Certificate"):
             certificate_button = st.button("Generate Certificate")
             emails = s.get_receiver_add()
-            selected_email = st.selectbox("Select your name for the certificate:", emails)
+            selected_email = st.selectbox("Select your email for the certificate:", emails)
             if certificate_button:
                 # List of names available for certificates, taken from the leaderboard
                 names = [entry["username"] for entry in st.session_state["leaderboard"]]
-                selected_name = st.selectbox("Select your name for the certificate:", names)
+                selected_name = st.selectbox("find your name:", names)
                 if selected_name and selected_email:
                     
                     certificate = s.get_certificate(selected_email)
