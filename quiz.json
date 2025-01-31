@@ -159,6 +159,7 @@
       "language": "Java"
     },
     {
+      "question": "What will be the output of the following C program?\n```c\n#include <stdio.h>\nint main() {\nint arr[] = {10, 20, 30, 40};int *ptr = arr;printf(\"%d %d\", *ptr, *(ptr+2));return 0;\n}\n```",
       "options": ["A) Compilation Error", "B) 2035", "C) NoSuchElementException", "D) InputMismatchException"],
       "correct_option": 3, 
       "time_limit": 120,
