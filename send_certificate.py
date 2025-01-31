@@ -22,7 +22,7 @@ import os
 
 def get_names(certificate_dir="certificates"):
     certificate_dir_path = os.path.join(os.getcwd(), certificate_dir)
-    certificate_files = [file for file in certificate_dir_path ]
+    certificate_files = [file for file in certificate_dir_path if file.endswith(".pdf")]
     return certificate_files
     
 
