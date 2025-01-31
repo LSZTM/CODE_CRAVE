@@ -21,7 +21,7 @@ def get_receiver_add():
 import os
 
 def get_names(certificate_dir="certificates"):
-    certificate_files = [file for file in certificate_dir if file.endswith(".pdf")]
+    certificate_files = [file for file in certificate_dir ]
     return certificate_files
     
 
