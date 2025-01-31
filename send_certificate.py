@@ -20,6 +20,11 @@ def get_receiver_add():
 # Function to get the log file path
 import os
 
+def get_names(certificate_dir="certificates")):
+    certificate_files = [file for file in certificate_dir if file.endswith(".pdf")]
+    return certificate_files
+    
+
 def get_certificate(name, certificate_dir="certificates"):
     """
     Function to get the path of the certificate for a given name.
