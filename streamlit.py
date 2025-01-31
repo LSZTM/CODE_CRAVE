@@ -311,7 +311,7 @@ import requests
 
 # Airtable API Credentials
 AIRTABLE_API_KEY = "pat3iS2qBn8ieAsKb.c9f71a1d00093034e336d13e96ee87eacf14cc8fb8ca4cccd221d8184a302aa5"  # Replace with your API Key
-BASE_ID = "appkzzJcyMwiRFMNp/tblhq8qnvPMHz68F6/viwlK9Bae50slCsQR"  # Replace with your Base ID
+BASE_ID = "appkzzJcyMwiRFMNp"  # Replace with your Base ID
 TABLE_NAME = "Leaderboard"
 
 # Function to add player data to Airtable
