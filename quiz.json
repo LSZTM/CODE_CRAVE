@@ -1,12 +1,12 @@
 {
   "title": "CODE CRAVE",
   "semester": "1",
-  "num_questions": 30, 
+  "num_questions": 30,
   "questions": [
     {
       "question": "What is the worst-case time complexity of QuickSort?",
       "options": ["A) O(n log n)", "B) O(n²)", "C) O(n)", "D) O(log n)"],
-      "correct_option": 1, 
+      "correct_option": 1,
       "time_limit": 120,
       "image": null,
       "language": ""
@@ -14,7 +14,7 @@
     {
       "question": "What is the average-case time complexity of Binary Search?",
       "options": ["A) O(n)", "B) O(log n)", "C) O(n log n)", "D) O(1)"],
-      "correct_option": 1, 
+      "correct_option": 1,
       "time_limit": 120,
       "image": null,
       "language": ""
@@ -22,253 +22,263 @@
     {
       "question": "What is the time complexity of accessing an element in a singly linked list by index?",
       "options": ["A) O(1)", "B) O(n)", "C) O(log n)", "D) O(n log n)"],
-      "correct_option": 1, 
+      "correct_option": 1,
       "time_limit": 120,
       "image": null,
       "language": ""
     },
     {
-      "question": "What will be the output of the following code?\n```c\n#include <stdio.h>\nint main() {\nint i;for (i = 1; i <= 10; i++) {if (i % 3 == 0) {if (i % 2 == 0)break;continue;}printf(\"%d \", i);}return 0;\n}\n```",
+      "question": "What will be the output of the following code?\n#include <stdio.h>\nint main() {\n  int i;\n  for (i = 1; i <= 10; i++) {\n    if (i % 3 == 0) {\n      if (i % 2 == 0)\n        break;\n      continue;\n    }\n    printf(\"%d \", i);\n  }\n  return 0;\n}",
       "options": ["A) 1 2 4 5 7 8 10", "B) 1 2 4 5 7 8", "C) 1 2 4 5 7 8 9", "D) 1 2 4 5 7 8 10 11"],
-      "correct_option": 1, 
+      "correct_option": 1,
       "time_limit": 120,
       "image": null,
       "language": "C"
     },
     {
-      "question": "What will be the output of the following code?\n```c\n#include <stdio.h>\nstruct Node {int data;struct Node* next;\n};\nvoid traverse(struct Node* head) {while (head != NULL) {printf(\"%d \", head->data);\nhead = head->next->next;\n}\n}\nint main() {\nstruct Node n1 = {1, NULL}, n2 = {2, NULL}, n3 = {3, NULL}, n4 = {4, NULL};\nn1.next = &n2;\nn2.next = &n3;\nn3.next = &n4;\ntraverse(&n1);\nreturn 0;\n}\n```",
+      "question": "What will be the output of the following code?\n#include <stdio.h>\nstruct Node {\n  int data;\n  struct Node* next;\n};\nvoid traverse(struct Node* head) {\n  while (head != NULL) {\n    printf(\"%d \", head->data);\n    head = head->next->next;\n  }\n}\nint main() {\n  struct Node n1 = {1, NULL}, n2 = {2, NULL}, n3 = {3, NULL}, n4 = {4, NULL};\n  n1.next = &n2;\n  n2.next = &n3;\n  n3.next = &n4;\n  traverse(&n1);\n  return 0;\n}",
       "options": ["A) 1 3", "B) 1 2 3 4", "C) 1 3 4", "D) Compilation Error"],
-      "correct_option": 0, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "Which of the following statements about printf and scanf functions is true?",
-      "options": ["A) scanf does not require the address-of operator for char arrays", "B) printf always returns 0", "C) printf can be used without #include <stdio.h>", "D) scanf can be used to read entire lines of text"],
-      "correct_option": 0, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What is the output of the following C program?\n```c\n#include <stdio.h>\nint main() {int x = 5;printf(\"%d %d %d\n\", x++, x++, ++x);return 0;\n}\n```",
-      "options": ["A) 5 6 8", "B) 7 7 8", "C) Undefined behavior", "D) 5 5 7"],
-      "correct_option": 2, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following C program?\n```c\n#include <stdio.h>\nint main() {\nint arr[] = {10, 20, 30, 40};int *ptr = arr;printf(\"%d %d\", *ptr, *(ptr+2));return 0;\n}\n```",
-      "options": ["A) 10 20", "B) 10 30", "C) 20 40", "D) Compilation Error"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following C program?\n```c\n#include <stdio.h>\nint main() {int a = 10, b = 20;int *ptr1 = &a, *ptr2 = &b;*ptr1 = *ptr2;*ptr2 = 50;printf(\"%d %d\", a, b);return 0;\n}\n```",
-      "options": ["A) 10 50", "B) 20 50", "C) 20 20", "D) 10 20"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following C program?\n```c\n#include <stdio.h>\n#include <stdlib.h>\n\nint main() {int *ptr;ptr = (int*) malloc(sizeof(int));if (!ptr) {printf(\"Memory allocation failed\n\");return 1;}*ptr = 100;printf(\"%d\n\", *ptr);\nfree(ptr);ptr = NULL;\nif (ptr == NULL)printf(\"Memory freed successfully\n\");\nreturn 0;\n}\n```",
-      "options": ["A) Compilation error", "B) 100 followed by \"Memory freed successfully\"", "C) 100 followed by a segmentation fault", "D) Undefined behavior"],
-      "correct_option": 1, 
+      "correct_option": 0,
       "time_limit": 120,
       "image": null,
       "language": "C"
     },
     
+      
     {
-      "question": "What will be the output of the following code?\n\n```python\nmy_list = [10, 20, 30, 40]\nfor i in range(len(my_list)):\nprint(my_list[i], end=' ')\n```",
-      "options": [
-        "A) 10 20 30 40",
-        "B) 40 30 20 10",
-        "C) 10 30 20 40",
-        "D) Error"
-      ],
+      "question": "Which of the following statements about printf and scanf functions is true?",
+      "options": ["A) scanf does not require the address-of operator for char arrays", "B) printf always returns 0", "C) printf can be used without #include <stdio.h>", "D) scanf can be used to read entire lines of text"],
       "correct_option": 0,
       "time_limit": 120,
       "image": null,
-      "language": "Python"
+      "language": "C"
     },
     {
-      "question": "What will be the output of the following code?\n\n```python\nmy_tuple = (1, 2, 3, 4)\nprint(my_tuple[1:3])\n```",
-      "options": [
-        "A) (1, 2, 3)",
-        "B) (2, 3)",
-        "C) (2, 3, 4)",
-        "D) Error"
-      ],
+      "question": "What is the output of the following C program?\n#include <stdio.h>\nint main() {\n  int x = 5;\n  printf(\"%d %d %d\\n\", x++, x++, ++x);\n  return 0;\n}",
+      "options": ["A) 5 6 8", "B) 7 7 8", "C) Undefined behavior", "D) 5 5 7"],
+      "correct_option": 2,
+      "time_limit": 120,
+      "image": null,
+      "language": "C"
+    },
+    {
+      "question": "What will be the output of the following C program?\n#include <stdio.h>\nint main() {\n  int arr[] = {10, 20, 30, 40};\n  int *ptr = arr;\n  printf(\"%d %d\", *ptr, *(ptr+2));\n  return 0;\n}",
+      "options": ["A) 10 20", "B) 10 30", "C) 20 40", "D) Compilation Error"],
       "correct_option": 1,
       "time_limit": 120,
       "image": null,
-      "language": "Python"
+      "language": "C"
     },
     {
-      "question": "What will be the output of the following code?\n\n```python\nmy_dict = {'a': 10, 'b': 20, 'c': 30}\nprint(my_dict.get('d', 40))\n```",
-      "options": [
-        "A) 10",
-        "B) 20",
-        "C) null",
-        "D) 40"
-      ],
-      "correct_option": 3,
+      "question": "What will be the output of the following C program?\n#include <stdio.h>\nint main() {\n  int a = 10, b = 20;\n  int *ptr1 = &a, *ptr2 = &b;\n  *ptr1 = *ptr2;\n  *ptr2 = 50;\n  printf(\"%d %d\", a, b);\n  return 0;\n}",
+      "options": ["A) 10 50", "B) 20 50", "C) 20 20", "D) 10 20"],
+      "correct_option": 1,
       "time_limit": 120,
       "image": null,
-      "language": "Python"
+      "language": "C"
     },
     {
-      "question": "What will be the output of the following code?\n\npython\nn = 5\nfor i in range(n):\n    for j in range(i + 1):\n        print('*', end=' ')\n    print()\n",
-      "options": [
-          "A) * * * * \\n * * * \\n * * * \\n * * * \\n * * * *",
-          "B) \\n \\n * \\n * * \\n * * * *",
-          "C) * * * * \\n * * \\n * \\n \\n",
-          "D) Error"
-      ],
+      "question": "What will be the output of the following C program?\n#include <stdio.h>\n#include <stdlib.h>\nint main() {\n  int *ptr;\n  ptr = (int *) malloc(sizeof(int));\n  if (!ptr) {\n    printf(\"Memory allocation failed\\n\");\n    return 1;\n  }\n  *ptr = 100;\n  printf(\"%d\\n\", *ptr);\n  free(ptr);\n  ptr = NULL;\n  if (ptr == NULL)\n    printf(\"Memory freed successfully\\n\");\n  return 0;\n}",
+      "options": ["A) Compilation error", "B) 100 followed by \"Memory freed successfully\"", "C) 100 followed by a segmentation fault", "D) Undefined behavior"],
       "correct_option": 1,
-      "time_limit": 180,
+      "time_limit": 120,
       "image": null,
-      "language": "Python"
+      "language": "C"
     },
+    
+      
+        {
+          "question": "What will be the output of the following code?\nmy_list = [10, 20, 30, 40]\nfor i in range(len(my_list)):\n  print(my_list[i], end=' ')",
+          "options": [
+            "A) 10 20 30 40",
+            "B) 40 30 20 10",
+            "C) 10 30 20 40",
+            "D) Error"
+          ],
+          "correct_option": 0,
+          "time_limit": 120,
+          "image": null,
+          "language": "Python"
+        },
+        {
+          "question": "What will be the output of the following code?\nmy_tuple = (1, 2, 3, 4)\nprint(my_tuple[1:3])",
+          "options": [
+            "A) (1, 2, 3)",
+            "B) (2, 3)",
+            "C) (2, 3, 4)",
+            "D) Error"
+          ],
+          "correct_option": 1,
+          "time_limit": 120,
+          "image": null,
+          "language": "Python"
+        },
+        {
+          "question": "What will be the output of the following code?\nmy_dict = {'a': 10, 'b': 20, 'c': 30}\nprint(my_dict.get('d', 40))",
+          "options": [
+            "A) 10",
+            "B) 20",
+            "C) null",
+            "D) 40"
+          ],
+          "correct_option": 3,
+          "time_limit": 120,
+          "image": null,
+          "language": "Python"
+        },
+        {
+          "question": "What will be the output of the following code?\nn = 5\nfor i in range(n):\n  for j in range(i + 1):\n    print('*', end=' ')\n  print()",
+          "options": [
+            "A) * * * * \\n * * * \\n * * * \\n * * * \\n * * * *",
+            "B) \\n \\n * \\n * * \\n * * * *",
+            "C) * * * * \\n * * \\n * \\n \\n",
+            "D) Error"
+          ],
+          "correct_option": 1,
+          "time_limit": 180,
+          "image": null,
+          "language": "Python"
+        },
+        {
+          "question": "What will be the output of the following code?\nmy_dict = {'x': 100, 'y': 200, 'z': 300}\nfor key in my_dict:\n  print(key, my_dict[key])",
+          "options": [
+            "A) x 100\ny 200\nz 300",
+            "B) 100 x\n200 y\n300 z",
+            "C) x y z\n100 200 300",
+            "D) Error"
+          ],
+          "correct_option": 0,
+          "time_limit": 120,
+          "image": null,
+          "language": "Python"
+        },
+        
+          
+            {
+              "question": "What will be the output of the following Java program?\nimport java.io.*;\npublic class Test {\n  public static void main(String[] args) throws IOException {\n    FileWriter fw = new FileWriter(\"test.txt\");\n    fw.write(\"Hello, Java!\");\n    fw.close();\n\n    FileReader fr = new FileReader(\"test.txt\");\n    int ch;\n    while ((ch = fr.read()) != -1) {\n      System.out.print((char) ch);\n    }\n    fr.close();\n  }\n}",
+              "options": ["A) Compilation Error", "B) \"Hello, Java!\"", "C) FileNotFoundException", "D) Runtime Error"],
+              "correct_option": 1,
+              "time_limit": 120,
+              "image": null,
+              "language": "Java"
+            },
+            {
+              "question": "What will be the output of the following Java program?\nimport java.util.Scanner;\npublic class Test {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(\"2035\");\n    System.out.println(sc.nextInt());\n  }\n}",
+              "options": ["A) Compilation Error", "B) 2035", "C) NoSuchElementException", "D) InputMismatchException"],
+              "correct_option": 3,
+              "time_limit": 120,
+              "image": null,
+              "language": "Java"
+            },
+            {
+              "question": "What will be the output of the following Java program?\npublic class Test {\n  public static void main(String[] args) {\n    int a = 10, b = 20, c = 30;\n    if (a > b && b < c)\n      System.out.println(\"A\");\n    else if (b > c || a < c)\n      System.out.println(\"B\");\n    else\n      System.out.println(\"C\");\n  }\n}",
+              "options": ["A) A", "B) B", "C) C", "D) No Output"],
+              "correct_option": 1,
+              "time_limit": 120,
+              "image": null,
+              "language": "Java"
+            },
+            {
+              "question": "What will be the output of the following Java code?\npublic class LoopExample {\n  public static void main(String[] args) {\n    int sum = 0;\n    for (int i = 0; i < 5; i++) {\n      if (i % 2 == 0)\n        continue;\n      sum += i;\n    }\n    System.out.println(sum);\n  }\n}",
+              "options": ["A) 10", "B) 4", "C) 6", "D) 5"],
+              "correct_option": 2,
+              "time_limit": 120,
+              "image": null,
+              "language": "Java"
+            },
+            {
+              "question": "What will be the output of the following Java program?\nimport java.util.HashMap;\npublic class CollectionsExample {\n  public static void main(String[] args) {\n    HashMap<Integer, String> map = new HashMap<>();\n    map.put(1, \"A\");\n    map.put(2, \"B\");\n    map.put(1, \"C\");\n\n    System.out.println(map.size());\n    System.out.println(map.get(1));\n  }\n}",
+              "options": ["A) 3, A", "B) 2, C", "C) 1, A", "D) 2, A"],
+              "correct_option": 1,
+              "time_limit": 120,
+              "image": null,
+              "language": "Java"
+            },
+            {
+              "question": "What will be the output of the following C++ program?\n#include <iostream>\n#include <fstream>\nusing namespace std;\n\nint main() {\n  ofstream fout(\"test.txt\");\n  fout << \"C++ File Handling!\";\n  fout.close();\n\n  ifstream fin(\"test.txt\");\n  string str;\n  getline(fin, str);\n  cout << str;\n  fin.close();\n\n  return 0;\n}",
+              "options": ["A) C++ File Handling!", "B) test.txt", "C) Compilation Error", "D) Undefined Behavior"],
+              "correct_option": 0,
+              "time_limit": 120,
+              "image": null,
+              "language": "C++"
+            },
+            {
+              "question": "What will be the output of the following C++ code?\n#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n  double x = 3.14159;\n  cout << fixed << setprecision(3) << x;\n  return 0;\n}",
+              "options": ["A) 3.14159", "B) 3.142", "C) 3.14", "D) Compilation Error"],
+              "correct_option": 1,
+              "time_limit": 120,
+              "image": null,
+              "language": "C++"
+            },
+            
+                {
+                  "question": "What will be the output of the following C++ code?\n#include <iostream>\nusing namespace std;\n\nint main() {\n  int *ptr = new int(10);\n  cout << *ptr;\n  delete ptr;\n  return 0;\n}",
+                  "options": ["A) 10", "B) 0", "C) Garbage value", "D) Compilation Error"],
+                  "correct_option": 0,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C++"
+                },
+                {
+                  "question": "What will be the output of the following C++ code?\n#include <iostream>\nusing namespace std;\n\nint main() {\n  int *arr = new int[5]{1, 2, 3, 4, 5};\n  cout << arr[2];\n  delete[] arr;\n  return 0;\n}",
+                  "options": ["A) 1", "B) 2", "C) 3", "D) Compilation Error"],
+                  "correct_option": 2,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C++"
+                },
+                {
+                  "question": "What will be the output of the following C++ code?\n#include <iostream>\nusing namespace std;\n\nclass Base {\npublic:\n  virtual void show() { cout << \"Base\"; }\n};\n\nclass Derived : public Base {\npublic:\n  void show() override { cout << \"Derived\"; }\n};\n\nint main() {\n  Base *b = new Derived();\n  b->show();\n  delete b;\n  return 0;\n}",
+                  "options": ["A) Base", "B) Derived", "C) Compilation Error", "D) Runtime Error"],
+                  "correct_option": 1,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C++"
+                },
+                {
+                  "question": "What is the size of an int data type in C on a 32-bit system?",
+                  "options": ["A) 2 bytes", "B) 4 bytes", "C) 8 bytes", "D) Size varies based on the compiler"],
+                  "correct_option": 1,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C"
+                },
+                {
+                  "question": "What will be the output of the following code?\n#include <stdio.h>\nint main() {\n  int x = 5, y = 10;\n  while (x < y) {\n    if (x % 2 == 0) {\n      x += 3;\n      continue;\n    }\n    printf(\"%d \", x);\n    x += 2;\n  }\n  return 0;\n}",
+                  "options": ["A) 5 7 9", "B) 5 6 8", "C) 5 7", "D) 5 7 9 10"],
+                  "correct_option": 0,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C"
+                },
+                {
+                  "question": "What will be the output of the following code?\n#include <stdio.h>\nint main() {\n  int i;\n  for (i = 1; i <= 10; i++) {\n    if (i % 3 == 0) {\n      if (i % 2 == 0)\n        break;\n      continue;\n    }\n    printf(\"%d \", i);\n  }\n  return 0;\n}",
+                  "options": ["A) 1 2 4 5 7 8 10", "B) 1 2 4 5 7 8", "C) 1 2 4 5 7 8 9", "D) 1 2 4 5 7 8 10 11"],
+                  "correct_option": 1,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C"
+                },
+                {
+                  "question": "What will be the output of the following code?\n#include <stdio.h>\nvoid func(int *a, int b) {\n  *a += b;\n  b *= 2;\n  printf(\"%d %d\\n\", *a, b);\n}\nint main() {\n  int x = 5, y = 3;\n  func(&x, y);\n  printf(\"%d %d\\n\", x, y);\n  return 0;\n}",
+                  "options": ["A) 8 6 \n 8 6", "B) 8 6 \n 5 3", "C) 5 6 \n 8 6", "D) 8 3 \n 5 3"],
+                  "correct_option": 1,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C"
+                },
+                {
+                  "question": "What will be the output of the following code?\n#include <stdio.h>\nstruct student {\n  int id;\n  char name[20];\n};\nunion data {\n  int x;\n  float y;\n};\nint main() {\n  struct student s = {1, \"John\"};\n  union data d;\n  d.x = 10;\n  d.y = 3.14;\n  printf(\"%d %s %.2f\\n\", s.id, s.name, d.y);\n  return 0;\n}",
+                  "options": ["A) 1 John 3.14", "B) 1 John 10", "C) 10 John 3.14", "D) Error due to overwriting in union"],
+                  "correct_option": 3,
+                  "time_limit": 120,
+                  "image": null,
+                  "language": "C"
+                }
+              ]
+            }
+          
 
-    {
-      "question": "What will be the output of the following code?\n\n```python\nmy_dict = {'x': 100, 'y': 200, 'z': 300}\nfor key in my_dict:\nprint(key, my_dict[key])\n```",
-      "options": [
-        "A) x 100\ny 200\nz 300",
-        "B) 100 x\n200 y\n300 z",
-        "C) x y z\n100 200 300",
-        "D) Error"
-      ],
-      "correct_option": 0,
-      "time_limit": 120,
-      "image": null,
-      "language": "Python"
-    },
-    {
-      "question": "What will be the output of the following Java program?\n```java\nimport java.io.*;\npublic class Test {\npublic static void main(String[] args) throws IOException {\nFileWriter fw = new FileWriter(\"test.txt\");\nfw.write(\"Hello, Java!\");\nfw.close();\n\nFileReader fr = new FileReader(\"test.txt\");\nint ch;\nwhile ((ch = fr.read()) != -1) {\nSystem.out.print((char) ch);\n}\nfr.close();\n}\n}\n```",
-      "options": ["A) Compilation Error", "B) \"Hello, Java!\"", "C) FileNotFoundException", "D) Runtime Error"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "Java"
-    },
-    {
-      "question": "What will be the output of the following C program?\n```c\n#include <stdio.h>\nint main() {\nint arr[] = {10, 20, 30, 40};int *ptr = arr;printf(\"%d %d\", *ptr, *(ptr+2));return 0;\n}\n```",
-      "options": ["A) Compilation Error", "B) 2035", "C) NoSuchElementException", "D) InputMismatchException"],
-      "correct_option": 3, 
-      "time_limit": 120,
-      "image": null,
-      "language": "Java"
-    },
-    {
-      "question": "What will be the output of the following Java program?\n```java\npublic class Test {\npublic static void main(String[] args) {\nint a = 10, b = 20, c = 30;\nif (a > b && b < c)\nSystem.out.println(\"A\");\nelse if (b > c || a < c)\nSystem.out.println(\"B\");\nelse\nSystem.out.println(\"C\");\n}\n}\n```",
-      "options": ["A) A", "B) B", "C) C", "D) No Output"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "Java"
-    },
-    {
-      "question": "What will be the output of the following Java code?\n```java\npublic class LoopExample {\npublic static void main(String[] args) {\nint sum = 0;\nfor (int i = 0; i < 5; i++) {\nif (i % 2 == 0)\ncontinue;\nsum += i;\n}\nSystem.out.println(sum);\n}\n}\n```",
-      "options": ["A) 10", "B) 4", "C) 6", "D) 5"],
-      "correct_option": 2, 
-      "time_limit": 120,
-      "image": null,
-      "language": "Java"
-    },
-    {
-      "question": "What will be the output of the following Java program?\n```java\nimport java.util.HashMap;\n\npublic class CollectionsExample {\npublic static void main(String[] args) {\nHashMap<Integer, String> map = new HashMap<>();\nmap.put(1, \"A\");\nmap.put(2, \"B\");\nmap.put(1, \"C\");\n\nSystem.out.println(map.size());\nSystem.out.println(map.get(1));\n}\n}\n```",
-      "options": ["A) 3, A", "B) 2, C", "C) 1, A", "D) 2, A"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "Java"
-    },
-    {
-      "question": "What will be the output of the following C++ program?\n```c++\n#include <iostream>\n#include <fstream>\nusing namespace std;\n\nint main() {\nofstream fout(\"test.txt\");\nfout << \"C++ File Handling!\";\nfout.close();\n\nifstream fin(\"test.txt\");\nstring str;\ngetline(fin, str);\ncout << str;\nfin.close();\n\nreturn 0;\n}\n```",
-      "options": ["A) C++ File Handling!", "B) test.txt", "C) Compilation Error", "D) Undefined Behavior"],
-      "correct_option": 0, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C++"
-    },
-    {
-      "question": "What will be the output of the following C++ code?\n\n```c++\n#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\ndouble x = 3.14159;\ncout << fixed << setprecision(3) << x;\nreturn 0;\n}\n```",
-      "options": ["A) 3.14159", "B) 3.142", "C) 3.14", "D) Compilation Error"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C++"
-    },
-    {
-      "question": "What will be the output of the following C++ code?\n\n```c++\n#include <iostream>\nusing namespace std;\n\nint main() {\nint *ptr = new int(10);\ncout << *ptr;\ndelete ptr;\nreturn 0;\n}\n```",
-      "options": ["A) 10", "B) 0", "C) Garbage value", "D) Compilation Error"],
-      "correct_option": 0, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C++"
-    },
-    {
-      "question": "What will be the output of the following C++ code?\n```c++\n#include <iostream>\nusing namespace std;\n\nint main() {\nint *arr = new int[5]{1, 2, 3, 4, 5};\ncout << arr[2];\ndelete[] arr;\nreturn 0;\n}\n```",
-      "options": ["A) 1", "B) 2", "C) 3", "D) Compilation Error"],
-      "correct_option": 2, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C++"
-    },
-    {
-      "question": "What will be the output of the following C++ code?\n\n```c++\n#include <iostream>\nusing namespace std;\n\nclass Base {\npublic:\nvirtual void show() { cout << \"Base\"; }\n};\n\nclass Derived : public Base {\npublic:\nvoid show() override { cout << \"Derived\"; }\n};\n\nint main() {\nBase *b = new Derived();\nb->show();\ndelete b;\nreturn 0;\n}\n```",
-      "options": ["A) Base", "B) Derived", "C) Compilation Error", "D) Runtime Error"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C++"
-    },
-    {
-      "question": "What is the size of an int data type in C on a 32-bit system?",
-      "options": ["A) 2 bytes", "B) 4 bytes", "C) 8 bytes", "D) Size varies based on the compiler"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following code?\n```c\n#include <stdio.h>\nint main() {\nint x = 5, y = 10;\nwhile (x < y) {\nif (x % 2 == 0) {\nx += 3;\ncontinue;\n}\nprintf(\"%d \", x);\nx += 2;\n}\nreturn 0;\n}\n```",
-      "options": ["A) 5 7 9", "B) 5 6 8", "C) 5 7", "D) 5 7 9 10"],
-      "correct_option": 0, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following code?\n```c\n#include <stdio.h>\nint main() {\nint i;\nfor (i = 1; i <= 10; i++) {\nif (i % 3 == 0) {\nif (i % 2 == 0)\nbreak;\ncontinue;\n}\nprintf(\"%d \", i);\n}\nreturn 0;\n}\n```",
-      "options": ["A) 1 2 4 5 7 8 10", "B) 1 2 4 5 7 8", "C) 1 2 4 5 7 8 9", "D) 1 2 4 5 7 8 10 11"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following code?\n```c\n#include <stdio.h>\nvoid func(int *a, int b) {\n*a += b;\nb *= 2;\nprintf(\"%d %d\n\", *a, b);\n}\nint main() {\nint x = 5, y = 3;\nfunc(&x, y);\nprintf(\"%d %d\n\", x, y);\nreturn 0;\n}\n```",
-      "options": ["A) 8 6 \n 8 6", "B) 8 6 \n 5 3", "C) 5 6 \n 8 6", "D) 8 3 \n 5 3"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What will be the output of the following code?\n```c\n#include <stdio.h>\nstruct student {\nint id;\nchar name[20];\n};\nunion data {\nint x;\nfloat y;\n};\nint main() {\nstruct student s = {1, \"John\"};\nunion data d;\nd.x = 10;\nd.y = 3.14;\nprintf(\"%d %s %.2f\n\", s.id, s.name, d.y);\nreturn 0;\n}\n```",
-      "options": ["A) 1 John 3.14", "B) 1 John 10", "C) 10 John 3.14", "D) Error due to overwriting in union"],
-      "correct_option": 3, 
-      "time_limit": 120,
-      "image": null,
-      "language": "C"
-    }
-  ]
-}
+  
+
+  
