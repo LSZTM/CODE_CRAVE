@@ -599,11 +599,11 @@ def landing_page():
         <div class="landing-container"> 
             <p class="instructions">General Instructions:</p>
             <ul class="instructions">
-                <li><span>1)</span> Any 2 sections are to be attempted from the given 3 sections</li>
+                <li><span>1)</span> All 3 sections are to be attempted from the given 3 sections</li>
                 <li><span>2)</span> From section 2 only one language is to be attempted</li>
                 <li><span>3)</span> All questions of an attempted section will be considered for marking</li>
-                <li><span>4)</span> If All 3 sections have been attempted, the best 2 will be considered</li>
-                <li><span>5)</span> Every question carries a weightage of 1 point</li>
+                <li><span>4)</span> There are 5 questions in each section, So in total every candidate is expected to attempt 15 questions in total </li>
+                <li><span>5)</span> There are two round sof competiton in total</li>
             </ul>
         </div>
         """,
