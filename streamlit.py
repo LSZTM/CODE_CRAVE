@@ -602,8 +602,8 @@ def landing_page():
                 <li><span>1)</span> All 3 sections are to be attempted from the given 3 sections</li>
                 <li><span>2)</span> From section 2 only one language is to be attempted</li>
                 <li><span>3)</span> All questions of an attempted section will be considered for marking</li>
-                <li><span>4)</span> There are 5 questions in each section, So in total every candidate is expected to attempt 15 questions in total </li>
-                <li><span>5)</span> There are two round sof competiton in total</li>
+                <li><span>4)</span> There are 5 questions in each section </li>
+                <li><span>5)</span> There are two rounds of competiton, after which the winner is announced</li>
             </ul>
         </div>
         """,
