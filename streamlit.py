@@ -385,10 +385,6 @@ def quiz_taker():
     if "quiz_started" not in st.session_state:
         st.session_state["quiz_started"] = False
 
-    if "selected_language" not in st.session_state:
-        st.session_state["selected_language"] = None
-
-    # ✅ Load leaderboard from Airtable instead of local file
     if "leaderboard" not in st.session_state:
         st.session_state["leaderboard"] = get_leaderboard().to_dict(orient="records")
 
@@ -398,9 +394,6 @@ def quiz_taker():
     if not st.session_state["quiz_started"]:
         st.title("Enter Your Details")
         username = st.text_input("Enter your username:", value=st.session_state["username"], key="username_input")
-
-        language_options = ["C", "Python", "Java", "C++"]
-        selected_language = st.selectbox("Select your preferred programming language:", language_options, key="language_selection")
 
         if st.button("Start Quiz"):
             if not username.strip():
@@ -412,7 +405,6 @@ def quiz_taker():
                 return
 
             st.session_state["username"] = username
-            st.session_state["selected_language"] = selected_language
             st.session_state["current_question"] = 0
             st.session_state["user_answers"] = {}
             st.session_state["answered_questions"] = set()
@@ -426,17 +418,7 @@ def quiz_taker():
 
     current_question_idx = st.session_state["current_question"]
     questions = quiz_data["questions"]
-    selected_language = st.session_state["selected_language"]
-
-    language_question_ranges = {
-        "C": range(6, 11),
-        "Python": range(11, 16),
-        "Java": range(16, 21),
-        "C++": range(21, 26)
-    }
-    selected_questions = ([questions[i - 1] for i in range(1, 6)] +  
-                          [questions[i - 1] for i in language_question_ranges[selected_language]] +  
-                          [questions[i - 1] for i in range(26, 31)])  
+    selected_questions = questions[:15]  # Only first 15 questions
 
     if len(st.session_state["answered_questions"]) == len(selected_questions):
         st.success("🎉 Quiz Completed! 🎉")
@@ -472,21 +454,12 @@ def quiz_taker():
                 st.write(f"**Q{i + 1}:** {q['question']}")
                 st.write(f"**Your Answer:** {user_answer}")
                 st.write(f"✅ **Correct Answer:** {correct_answer}")
-
-        # Show Generate Certificate button and dropdown list after quiz completion
-        
-                    
-        
         return
 
     question = selected_questions[current_question_idx]
-    language = question.get("language", None)
     
     with st.expander(f"❓ Question {current_question_idx + 1}", expanded=True):
-        if language:
-            st.code(question['question'], language=language)
-        else:
-            st.write(f"**{question['question']}**")
+        st.write(f"**{question['question']}**")
 
         options = ["Select an answer"] + question["options"]
         user_answer = st.radio("Select an answer:", options=options, index=0, key=f"answer_{current_question_idx}")
