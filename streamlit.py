@@ -603,7 +603,7 @@ def landing_page():
                 <li><span>2)</span> From section 2 only one language is to be attempted</li>
                 <li><span>3)</span> All questions of an attempted section will be considered for marking</li>
                 <li><span>4)</span> There are 5 questions in each section </li>
-                <li><span>5)</span> There are two rounds of competiton, after which the winner is announced</li>
+                <li><span>5)</span> There are two rounds of competiton, after which the winner will be announced</li>
             </ul>
         </div>
         """,
