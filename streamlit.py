@@ -630,7 +630,7 @@ def main():
     elif st.session_state["page"] == "quiz_taker":
         quiz_taker()
     elif st.session_state["page"] == "quiz_maker":
-        quiz_maker()
+        st.title("Access Denied")
 
 if __name__ == "__main__":
     main()
