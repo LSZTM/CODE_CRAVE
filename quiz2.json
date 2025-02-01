@@ -1,0 +1,127 @@
+{
+  "title": "CODE CRAVE",
+  "semester": "1",
+  "num_questions": 15, 
+  "questions": [
+    {
+      "question": "Which data structure uses LIFO order?",
+      "options": ["A) Queue", "B) Stack", "C) Linked List", "D) Tree"],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "What is the worst-case time complexity of MergeSort?",
+      "options": ["A) O(n)", "B) O(n log n)", "C) O(n^2)", "D) O(log n)"],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which of the following is not a stable sorting algorithm?",
+      "options": ["A) MergeSort", "B) QuickSort", "C) BubbleSort", "D) InsertionSort"],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "What is the output of the following Python code?\n```python\na = [1, 2, 3, 4]\nprint(a[::-1])\n```",
+      "options": ["A) [1, 2, 3, 4]", "B) [4, 3, 2, 1]", "C) [3, 2, 1, 4]", "D) Error"],
+      "correct_option": 1,
+      "time_limit": 120,
+      "image": null,
+      "language": "Python"
+    },
+    {
+      "question": "Which principle of OOP allows a class to inherit the properties of another class?",
+      "options": ["A) Abstraction", "B) Encapsulation", "C) Inheritance", "D) Polymorphism"],
+      "correct_option": 2,
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which of the following is NOT a characteristic of Object-Oriented Programming?",
+      "options": ["A) Procedural approach", "B) Encapsulation", "C) Polymorphism", "D) Inheritance"],
+      "correct_option": 0,
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which SQL statement is used to remove all records from a table without deleting the table structure?",
+      "options": ["A) DELETE", "B) DROP", "C) TRUNCATE", "D) CLEAR"],
+      "correct_option": 2,
+      "time_limit": 120,
+      "image": null,
+      "language": "SQL"
+    },
+    {
+      "question": "Which type of error occurs when the program runs but produces incorrect output?",
+      "options": ["A) Syntax Error", "B) Runtime Error", "C) Logical Error", "D) Compilation Error"],
+      "correct_option": 2,
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which command is used to fetch only unique values from a column in SQL?",
+      "options": ["A) SELECT DISTINCT", "B) SELECT UNIQUE", "C) SELECT FILTER", "D) SELECT DISTINCTIVE"],
+      "correct_option": 0,
+      "time_limit": 120,
+      "image": null,
+      "language": "SQL"
+    },
+    {
+      "question": "What is the space complexity of Depth First Search (DFS)?",
+      "options": ["A) O(1)", "B) O(n)", "C) O(log n)", "D) O(n^2)"],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which sorting algorithm works by repeatedly selecting the smallest element?",
+      "options": ["A) BubbleSort", "B) SelectionSort", "C) MergeSort", "D) QuickSort"],
+      "correct_option": 1, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which key uniquely identifies each record in a database table?",
+      "options": ["A) Foreign Key", "B) Primary Key", "C) Candidate Key", "D) Super Key"],
+      "correct_option": 1,
+      "time_limit": 120,
+      "image": null,
+      "language": "SQL"
+    },
+    {
+      "question": "Which of the following is a characteristic of a binary search tree?",
+      "options": ["A) Left child is always greater than right child", "B) Right child is always greater than left child", "C) Left child is smaller and right child is greater", "D) No such property"],
+      "correct_option": 2, 
+      "time_limit": 120,
+      "image": null,
+      "language": ""
+    },
+    {
+      "question": "Which of the following is used to handle exceptions in Python?",
+      "options": ["A) catch", "B) try-except", "C) throw", "D) finally"],
+      "correct_option": 1,
+      "time_limit": 120,
+      "image": null,
+      "language": "Python"
+    },
+    {
+      "question": "Which SQL clause is used to filter records based on a specific condition?",
+      "options": ["A) ORDER BY", "B) GROUP BY", "C) WHERE", "D) HAVING"],
+      "correct_option": 2,
+      "time_limit": 120,
+      "image": null,
+      "language": "SQL"
+    }
+  ]
+}
