@@ -474,17 +474,7 @@ def quiz_taker():
                 st.write(f"✅ **Correct Answer:** {correct_answer}")
 
         # Show Generate Certificate button and dropdown list after quiz completion
-        with st.expander("🎓 Generate Certificate"):
-            certificate_button = st.button("Generate Certificate")
-            emails = s.get_receiver_add()
-            selected_email = st.selectbox("Select your email for the certificate:", emails)
-            names = s.get_names()
-            selected_name = st.selectbox("Select your name:", names)
-            if selected_name and selected_email:
-                 if certificate_button:
-                    certificate = s.get_certificate(selected_email)
-                    s.send_mail(certificate,selected_email)
-                    st.success(f"Certificate generated for {selected_name}!")
+        
                     
         
         return
