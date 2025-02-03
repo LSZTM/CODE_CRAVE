@@ -33,7 +33,7 @@ if "answered_questions" not in st.session_state:
 if "quiz_data" not in st.session_state:
     # Load quiz from JSON (assuming quiz.json exists)
     try:
-        with open("quiz.json", "r") as f:
+        with open("quiz2.json", "r") as f:
             st.session_state["quiz_data"] = json.load(f)
     except:
         st.error("No quiz available to take!")
