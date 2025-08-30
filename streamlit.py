@@ -123,7 +123,7 @@ def quiz_maker():
 # Initialize session state
 if "quiz_data" not in st.session_state:
     try:
-        with open("quiz2.json", "r") as f:
+        with open("quiz.json", "r") as f:
             st.session_state["quiz_data"] = json.load(f)
     except FileNotFoundError:
         st.session_state["quiz_data"] = None
@@ -607,4 +607,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
