@@ -566,17 +566,16 @@ def landing_page():
     add_landing_styles()
     st.markdown(
         """
-        <h1 class="landing-title">CODE CRAVE '25</h1>
+        <h1 class="landing-title">DESIGN AND DEPLY '25</h1>
         <h3 class="landing-subtitle">AN ULTIMATE QUIZ BATTLE</h3>
 
         <div class="landing-container"> 
             <p class="instructions">General Instructions:</p>
             <ul class="instructions">
-                <li><span>1)</span> All 3 sections are to be attempted from the given 3 sections</li>
-                <li><span>2)</span> From section 2 only one language is to be attempted</li>
+                
                 <li><span>3)</span> All questions of an attempted section will be considered for marking</li>
-                <li><span>4)</span> There are 5 questions in each section </li>
-                <li><span>5)</span> There are two rounds of competiton, after which the winner will be announced</li>
+                
+                
             </ul>
         </div>
         """,
@@ -607,5 +606,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
