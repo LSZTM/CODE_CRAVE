@@ -566,18 +566,8 @@ def landing_page():
     add_landing_styles()
     st.markdown(
         """
-        <h1 class="landing-title">DESIGN AND DEPLY '25</h1>
+        <h1 class="landing-title">DESIGN AND DEPLOY '25</h1>
         <h3 class="landing-subtitle">AN ULTIMATE QUIZ BATTLE</h3>
-
-        <div class="landing-container"> 
-            <p class="instructions">General Instructions:</p>
-            <ul class="instructions">
-                
-                <li><span>3)</span> All questions of an attempted section will be considered for marking</li>
-                
-                
-            </ul>
-        </div>
         """,
         unsafe_allow_html=True
     )
