@@ -4,134 +4,134 @@
   "num_questions": 10,
   "questions": [
     {
-      "question": "Which HTML tag is used to create a hyperlink?",
+      "question": "Which shortcut key creates a new Frame in Figma?",
       "options": [
-        "A) <link>",
-        "B) <a>",
-        "C) <href>",
-        "D) <p>"
+        "A) R",
+        "B) F",
+        "C) T",
+        "D) Ctrl + G"
       ],
       "correct_option": 1,
       "time_limit": 60,
       "image": null,
-      "language": "HTML/CSS"
+      "language": "Figma"
     },
     {
-      "question": "What is the correct syntax for a CSS class selector?",
+      "question": "What does the shortcut R do in Figma?",
       "options": [
-        "A) element.class {}",
-        "B) #class {}",
-        "C) .class {}",
-        "D) class {}"
-      ],
-      "correct_option": 2,
-      "time_limit": 60,
-      "image": null,
-      "language": "HTML/CSS"
-    },
-    {
-      "question": "In the CSS Box Model, what is the correct order of properties, from the innermost layer to the outermost?",
-      "options": [
-        "A) Margin, Border, Padding, Content",
-        "B) Padding, Content, Border, Margin",
-        "C) Content, Padding, Border, Margin",
-        "D) Content, Border, Padding, Margin"
-      ],
-      "correct_option": 2,
-      "time_limit": 60,
-      "image": null,
-      "language": "HTML/CSS"
-    },
-    {
-      "question": "What is the primary purpose of using semantic HTML5 tags like <header> and <main>?",
-      "options": [
-        "A) To apply default styling to the elements.",
-        "B) To improve search engine optimization (SEO) and accessibility.",
-        "C) To force a specific layout on the webpage without using CSS.",
-        "D) To make the code shorter and more concise."
-      ],
-      "correct_option": 1,
-      "time_limit": 60,
-      "image": null,
-      "language": "HTML/CSS"
-    },
-    {
-      "question": "How do you correctly link an external CSS file named styles.css to an HTML document?",
-      "options": [
-        "A) <style src=\"styles.css\">",
-        "B) <a href=\"styles.css\">",
-        "C) <link rel=\"stylesheet\" href=\"styles.css\">",
-        "D) <head rel=\"stylesheet\" href=\"styles.css\">"
-      ],
-      "correct_option": 2,
-      "time_limit": 60,
-      "image": null,
-      "language": "HTML/CSS"
-    },
-    {
-      "question": "Which CSS property is used to change the font color of an element?",
-      "options": [
-        "A) font-color",
-        "B) text-color",
-        "C) color",
-        "D) background-color"
-      ],
-      "correct_option": 2,
-      "time_limit": 60,
-      "image": null,
-      "language": "HTML/CSS"
-    },
-    {
-      "question": "To create a list of projects for a portfolio, which HTML element is the most appropriate?",
-      "options": [
-        "A) <ul>",
-        "B) <p>",
-        "C) <h1>",
-        "D) <main>"
+        "A) Rectangle Tool",
+        "B) Rotate Object",
+        "C) Reset View",
+        "D) Resize Canvas"
       ],
       "correct_option": 0,
       "time_limit": 60,
       "image": null,
-      "language": "HTML/CSS"
+      "language": "Figma"
     },
     {
-      "question": "Which of the following is an example of a CSS ID selector?",
+      "question": "If you press T, what happens?",
       "options": [
-        "A) .container",
-        "B) h1",
-        "C) #container",
-        "D) *"
+        "A) Opens the Text tool",
+        "B) Selects the Toolbar",
+        "C) Adds a Title block",
+        "D) Toggles Templates"
+      ],
+      "correct_option": 0,
+      "time_limit": 60,
+      "image": null,
+      "language": "Figma"
+    },
+    {
+      "question": "The shortcut V in Figma is used for…",
+      "options": [
+        "A) Move tool",
+        "B) View layers",
+        "C) Vector drawing",
+        "D) Vertical alignment"
+      ],
+      "correct_option": 0,
+      "time_limit": 60,
+      "image": null,
+      "language": "Figma"
+    },
+    {
+      "question": "Which shortcut groups selected objects together?",
+      "options": [
+        "A) Ctrl + D",
+        "B) Ctrl + G",
+        "C) Ctrl + /",
+        "D) Alt + G"
+      ],
+      "correct_option": 1,
+      "time_limit": 60,
+      "image": null,
+      "language": "Figma"
+    },
+    {
+      "question": "What does the shortcut Ctrl + / do?",
+      "options": [
+        "A) Opens quick search",
+        "B) Divides an object",
+        "C) Opens prototype mode",
+        "D) Duplicates a layer"
+      ],
+      "correct_option": 0,
+      "time_limit": 60,
+      "image": null,
+      "language": "Figma"
+    },
+    {
+      "question": "In the Figma interface, which panel shows your list of frames, groups, and layers?",
+      "options": [
+        "A) Right Properties Panel",
+        "B) Left Layers Panel",
+        "C) Top Toolbar",
+        "D) Canvas"
+      ],
+      "correct_option": 1,
+      "time_limit": 60,
+      "image": null,
+      "language": "Figma"
+    },
+    {
+      "question": "The main working space where you draw, arrange, and design is called…",
+      "options": [
+        "A) Layers Panel",
+        "B) Toolbar",
+        "C) Canvas",
+        "D) Properties Panel"
       ],
       "correct_option": 2,
       "time_limit": 60,
       "image": null,
-      "language": "HTML/CSS"
+      "language": "Figma"
     },
     {
-      "question": "What CSS property is essential for using the Flexbox layout model?",
+      "question": "Where do you find alignment, color, and size options for a selected object?",
       "options": [
-        "A) align-items: center;",
-        "B) flex-direction: row;",
-        "C) justify-content: space-between;",
-        "D) display: flex;"
+        "A) Top Toolbar",
+        "B) Right Properties Panel",
+        "C) Left Layers Panel",
+        "D) Canvas"
       ],
-      "correct_option": 3,
+      "correct_option": 1,
       "time_limit": 60,
       "image": null,
-      "language": "HTML/CSS"
+      "language": "Figma"
     },
     {
-      "question": "What is the correct way to add an image to an HTML page?",
+      "question": "If you want to zoom in/out quickly, which key would you press?",
       "options": [
-        "A) <image src=\"picture.jpg\">",
-        "B) <img href=\"picture.jpg\" alt=\"A picture\">",
-        "C) <img src=\"picture.jpg\" alt=\"A picture\">",
-        "D) <img>picture.jpg</img>"
+        "A) Z",
+        "B) X",
+        "C) Ctrl + Shift",
+        "D) Alt"
       ],
-      "correct_option": 2,
+      "correct_option": 0,
       "time_limit": 60,
       "image": null,
-      "language": "HTML/CSS"
+      "language": "Figma"
     }
   ]
 }
