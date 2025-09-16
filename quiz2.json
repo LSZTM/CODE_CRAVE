@@ -1,127 +1,143 @@
 {
-  "title": "CODE CRAVE",
+  "title": "C Programming: Conditional Statements",
+  "topic": "Conditionals",
   "semester": "1",
-  "num_questions": 15, 
+  "num_questions": 10,
   "questions": [
     {
-      "question": "Which data structure uses LIFO order?",
-      "options": ["A) Queue", "B) Stack", "C) Linked List", "D) Tree"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": ""
-    },
-    {
-      "question": "What is the worst-case time complexity of MergeSort?",
-      "options": ["A) O(n)", "B) O(n log n)", "C) O(n^2)", "D) O(log n)"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": ""
-    },
-    {
-      "question": "Which of the following is not a stable sorting algorithm?",
-      "options": ["A) MergeSort", "B) QuickSort", "C) BubbleSort", "D) InsertionSort"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": ""
-    },
-    {
-      "question": "What is the output of the following Python code?\n```python\na = [1, 2, 3, 4]\nprint(a[::-1])\n```",
-      "options": ["A) [1, 2, 3, 4]", "B) [4, 3, 2, 1]", "C) [3, 2, 1, 4]", "D) Error"],
-      "correct_option": 1,
-      "time_limit": 120,
-      "image": null,
-      "language": "Python"
-    },
-    {
-      "question": "Which principle of OOP allows a class to inherit the properties of another class?",
-      "options": ["A) Abstraction", "B) Encapsulation", "C) Inheritance", "D) Polymorphism"],
+      "question": "What is the primary purpose of an `if-else` statement?",
+      "options": [
+        "A) To execute a block of code repeatedly.",
+        "B) To define a variable with a condition.",
+        "C) To make decisions and execute one of two code blocks based on a condition.",
+        "D) To stop the program execution."
+      ],
       "correct_option": 2,
-      "time_limit": 120,
-      "image": null,
-      "language": ""
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "language": "C"
     },
     {
-      "question": "Which of the following is NOT a characteristic of Object-Oriented Programming?",
-      "options": ["A) Procedural approach", "B) Encapsulation", "C) Polymorphism", "D) Inheritance"],
+      "question": "What is the output of the following code? `int x = 5; if (x = 0) { printf(\"True\"); } else { printf(\"False\"); }`",
+      "options": [
+        "A) True",
+        "B) False",
+        "C) Compilation Error",
+        "D) No output"
+      ],
+      "correct_option": 1,
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "explanation": "The assignment operator `=` is used instead of the comparison operator `==`. The expression `x = 0` assigns 0 to x and evaluates to 0 (false), so the else block is executed.",
+      "language": "C"
+    },
+    {
+      "question": "Which statement is true about the `switch` statement in C?",
+      "options": [
+        "A) It only works with floating-point values.",
+        "B) A `switch` must always have a `default` case.",
+        "C) If a `break` is omitted, execution 'falls through' to the next case.",
+        "D) `case` labels can have duplicate values."
+      ],
+      "correct_option": 2,
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "language": "C"
+    },
+    {
+      "question": "The ternary operator `? :` is a shorthand for which statement?",
+      "options": [
+        "A) for loop",
+        "B) while loop",
+        "C) if-else statement",
+        "D) switch statement"
+      ],
+      "correct_option": 2,
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "language": "C"
+    },
+    {
+      "question": "What will be the value of `b` after this code executes? `int a = 5, b = 10; if (a > 10 && b++ > 5) { /* empty */ }`",
+      "options": [
+        "A) 10",
+        "B) 11",
+        "C) 5",
+        "D) Undefined"
+      ],
       "correct_option": 0,
       "time_limit": 120,
-      "image": null,
-      "language": ""
+      "difficulty": "Hard",
+      "explanation": "This demonstrates short-circuit evaluation. Since `a > 10` is false, the second part of the AND condition (`b++ > 5`) is never evaluated. Thus, `b` remains 10.",
+      "language": "C"
     },
     {
-      "question": "Which SQL statement is used to remove all records from a table without deleting the table structure?",
-      "options": ["A) DELETE", "B) DROP", "C) TRUNCATE", "D) CLEAR"],
+      "question": "Which operator is used to check for inequality?",
+      "options": [
+        "A) ==",
+        "B) =",
+        "C) !=",
+        "D) <>"
+      ],
       "correct_option": 2,
-      "time_limit": 120,
-      "image": null,
-      "language": "SQL"
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "language": "C"
     },
     {
-      "question": "Which type of error occurs when the program runs but produces incorrect output?",
-      "options": ["A) Syntax Error", "B) Runtime Error", "C) Logical Error", "D) Compilation Error"],
+      "question": "What is the output of this code? `int a = 2; switch(a) { case 1: printf(\"A\"); case 2: printf(\"B\"); case 3: printf(\"C\"); default: printf(\"D\"); }`",
+      "options": [
+        "A) B",
+        "B) BD",
+        "C) BCD",
+        "D) ABCD"
+      ],
       "correct_option": 2,
-      "time_limit": 120,
-      "image": null,
-      "language": ""
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "explanation": "Without `break` statements, the switch case `2` is executed, and it 'falls through', executing all subsequent cases including `case 3` and `default`.",
+      "language": "C"
     },
     {
-      "question": "Which command is used to fetch only unique values from a column in SQL?",
-      "options": ["A) SELECT DISTINCT", "B) SELECT UNIQUE", "C) SELECT FILTER", "D) SELECT DISTINCTIVE"],
-      "correct_option": 0,
-      "time_limit": 120,
-      "image": null,
-      "language": "SQL"
+      "question": "Which of the following data types is NOT permissible for a `switch` statement expression?",
+      "options": [
+        "A) int",
+        "B) char",
+        "C) float",
+        "D) enum"
+      ],
+      "correct_option": 2,
+      "time_limit": 75,
+      "difficulty": "Medium",
+      "explanation": "The expression in a switch statement must evaluate to an integral or character type. Floats and doubles are not allowed.",
+      "language": "C"
     },
     {
-      "question": "What is the space complexity of Depth First Search (DFS)?",
-      "options": ["A) O(1)", "B) O(n)", "C) O(log n)", "D) O(n^2)"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": ""
-    },
-    {
-      "question": "Which sorting algorithm works by repeatedly selecting the smallest element?",
-      "options": ["A) BubbleSort", "B) SelectionSort", "C) MergeSort", "D) QuickSort"],
-      "correct_option": 1, 
-      "time_limit": 120,
-      "image": null,
-      "language": ""
-    },
-    {
-      "question": "Which key uniquely identifies each record in a database table?",
-      "options": ["A) Foreign Key", "B) Primary Key", "C) Candidate Key", "D) Super Key"],
+      "question": "What does the expression `! (x > 5)` evaluate to if `x` is 3?",
+      "options": [
+        "A) 0 (false)",
+        "B) 1 (true)",
+        "C) 3",
+        "D) Syntax Error"
+      ],
       "correct_option": 1,
-      "time_limit": 120,
-      "image": null,
-      "language": "SQL"
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "explanation": "`x > 5` (3 > 5) is false (0). The logical NOT `!` operator inverts it to true (1).",
+      "language": "C"
     },
     {
-      "question": "Which of the following is a characteristic of a binary search tree?",
-      "options": ["A) Left child is always greater than right child", "B) Right child is always greater than left child", "C) Left child is smaller and right child is greater", "D) No such property"],
-      "correct_option": 2, 
-      "time_limit": 120,
-      "image": null,
-      "language": ""
-    },
-    {
-      "question": "Which of the following is used to handle exceptions in Python?",
-      "options": ["A) catch", "B) try-except", "C) throw", "D) finally"],
-      "correct_option": 1,
-      "time_limit": 120,
-      "image": null,
-      "language": "Python"
-    },
-    {
-      "question": "Which SQL clause is used to filter records based on a specific condition?",
-      "options": ["A) ORDER BY", "B) GROUP BY", "C) WHERE", "D) HAVING"],
+      "question": "Consider `int y = (x > 9) ? 100 : 200;`. What is the value of `y` if `x` is 10?",
+      "options": [
+        "A) 9",
+        "B) 10",
+        "C) 100",
+        "D) 200"
+      ],
       "correct_option": 2,
-      "time_limit": 120,
-      "image": null,
-      "language": "SQL"
+      "time_limit": 75,
+      "difficulty": "Medium",
+      "language": "C"
     }
   ]
 }
