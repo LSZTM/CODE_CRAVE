@@ -1,0 +1,146 @@
+{
+  "title": "C Programming: Looping Constructs",
+  "topic": "Looping",
+  "semester": "1",
+  "num_questions": 10,
+  "questions": [
+    {
+      "question": "Which loop construct is guaranteed to execute its body at least once?",
+      "options": [
+        "A) for loop",
+        "B) while loop",
+        "C) do-while loop",
+        "D) All loops execute at least once"
+      ],
+      "correct_option": 2,
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "explanation": "A do-while loop checks its condition *after* the loop body has executed.",
+      "language": "C"
+    },
+    {
+      "question": "What does the `continue` statement do when placed inside a loop?",
+      "options": [
+        "A) Terminates the loop immediately.",
+        "B) Skips the rest of the current iteration and starts the next one.",
+        "C) Pauses the loop execution.",
+        "D) Deletes the current value of the loop counter."
+      ],
+      "correct_option": 1,
+      "time_limit": 75,
+      "difficulty": "Easy",
+      "language": "C"
+    },
+    {
+      "question": "What is the output of the following code? `for (int i = 0; i < 5; i++); { printf(\"%d\", i); }`",
+      "options": [
+        "A) 01234",
+        "B) 5",
+        "C) 4",
+        "D) Compilation Error"
+      ],
+      "correct_option": 1,
+      "time_limit": 120,
+      "difficulty": "Hard",
+      "explanation": "The semicolon after the `for` statement creates an empty loop body. The loop runs 5 times, incrementing `i` to 5. After the loop terminates, the `printf` statement (which is in its own block) executes once, printing the final value of `i`, which is 5.",
+      "language": "C"
+    },
+    {
+      "question": "How would you write an infinite loop using a `for` statement?",
+      "options": [
+        "A) `for(;;)`",
+        "B) `for(int i=0; i<0; i--)`",
+        "C) `for( ; 0; )`",
+        "D) `for(inf)`"
+      ],
+      "correct_option": 0,
+      "time_limit": 75,
+      "difficulty": "Medium",
+      "explanation": "Omitting all three parts of the `for` loop (initialization, condition, and increment) creates an infinite loop.",
+      "language": "C"
+    },
+    {
+      "question": "What is the purpose of the `break` statement?",
+      "options": [
+        "A) To skip the current iteration of a loop.",
+        "B) To exit a loop or `switch` statement immediately.",
+        "C) To start a loop over from the beginning.",
+        "D) To indicate a breakpoint for debugging."
+      ],
+      "correct_option": 1,
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "language": "C"
+    },
+    {
+      "question": "What is the output of this code? `int i = 0; while (i++ < 3) { printf(\"%d \", i); }`",
+      "options": [
+        "A) 0 1 2 ",
+        "B) 1 2 3 ",
+        "C) 0 1 2 3 ",
+        "D) 1 2 "
+      ],
+      "correct_option": 1,
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "explanation": "This uses post-increment. 1) i=0, 0<3 is true, i becomes 1, print 1. 2) i=1, 1<3 is true, i becomes 2, print 2. 3) i=2, 2<3 is true, i becomes 3, print 3. 4) i=3, 3<3 is false, loop ends.",
+      "language": "C"
+    },
+    {
+      "question": "In a standard `for (A; B; C)` loop, in what order are the parts executed?",
+      "options": [
+        "A) A, B, C, Loop Body",
+        "B) A, then repeatedly: B, Loop Body, C",
+        "C) A, then repeatedly: C, Loop Body, B",
+        "D) Repeatedly: A, B, C, Loop Body"
+      ],
+      "correct_option": 1,
+      "time_limit": 75,
+      "difficulty": "Medium",
+      "explanation": "A (initialization) runs once. Then, B (condition) is checked, the Loop Body runs, and C (increment) runs, repeating this cycle.",
+      "language": "C"
+    },
+    {
+      "question": "How many times will the inner loop execute? `for(int i=0; i<3; i++) { for(int j=0; j<4; j++) { /* ... */ } }`",
+      "options": [
+        "A) 3",
+        "B) 4",
+        "C) 7",
+        "D) 12"
+      ],
+      "correct_option": 3,
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "explanation": "The outer loop runs 3 times, and for each of those times, the inner loop runs 4 times. Total executions = 3 * 4 = 12.",
+      "language": "C"
+    },
+    {
+      "question": "What is the final value of `count`? `int count=0; for(int i=1; i<=10; i*=2) { count++; }`",
+      "options": [
+        "A) 10",
+        "B) 3",
+        "C) 4",
+        "D) 5"
+      ],
+      "correct_option": 2,
+      "time_limit": 120,
+      "difficulty": "Hard",
+      "explanation": "The loop runs for i = 1, 2, 4, 8. When i becomes 16, the condition i<=10 is false. The loop body executes 4 times.",
+      "language": "C"
+    },
+    {
+      "question": "Which of the following cannot be used as the condition in a `while` loop?",
+      "options": [
+        "A) `while(1)`",
+        "B) `while(x < 5)`",
+        "C) `while(x = 0)`",
+        "D) All of the above are valid"
+      ],
+      "correct_option": 3,
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "explanation": "All are syntactically valid. `while(1)` is an infinite loop. `while(x<5)` is a standard condition. `while(x=0)` is a common bug; it assigns 0 to x and the condition becomes `while(0)`, which never executes the loop body.",
+      "language": "C"
+    }
+  ]
+}
