@@ -476,18 +476,19 @@ def quiz_taker():
 
 
 def add_landing_styles():
-    """Adds custom CSS styles for the landing page with enhanced text effects and contrasting text colors."""
+    """Adds modern CSS styles for the landing page with glassmorphism, animations, and enhanced text visuals."""
     st.markdown(
         """
         <style>
         body {
-            background-color: #28282B; /* Set background color for the entire page */
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54, #1e1e2f);
             margin: 0; 
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh; 
+            font-family: 'Montserrat', sans-serif;
         }
 
         @keyframes fadeIn {
@@ -506,57 +507,60 @@ def add_landing_styles():
 
         .landing-container {
             text-align: center;
-            max-width: 800px;
-            padding: 20px;
+            max-width: 850px;
+            padding: 40px;
             color: #fff; 
-            border: 2px solid #fff; /* Add a white border to the container */
-            border-radius: 10px; /* Add rounded corners to the container */
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Add a subtle shadow */
-        }
-
-        .instructions {
-            font-size: 1.2rem; /* Increase font size for better visibility */
-            color: #fff; /* Set text color to white for contrast */
-            margin-bottom: 20px; 
+            border-radius: 20px; 
+            background: rgba(255, 255, 255, 0.05); /* glass effect */
+            backdrop-filter: blur(12px); /* frosted glass */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 2s ease forwards;
         }
 
         .landing-title {
-            font-size: 4rem;
-            font-weight: bold;
+            font-size: 3.5rem;
+            font-weight: 800;
             margin: 0;
-            animation: fadeIn 2s ease forwards, typing 4s steps(40, end) 1s both, blink .5s step-end infinite;
-            font-family: 'Montserrat', sans-serif;
-            color: #FFFFFF;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: typing 3.5s steps(35, end) 0.5s both, blink .7s step-end infinite;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 
+                         0 0 30px rgba(0, 200, 255, 0.4);
             white-space: nowrap;
             overflow: hidden;
-            border-right: 2px solid #FFFFFF;
-            text-align : center;
+            border-right: 3px solid #00c8ff;
         }
 
         .landing-subtitle {
-            font-size: 1.5rem;
-            margin: 10px 0;
+            font-size: 1.6rem;
+            margin: 20px 0;
             animation: fadeIn 3s ease forwards;
-            font-family: 'Montserrat', sans-serif;
-            color: #E3E3E3;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            color: #e0e0e0;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.4);
         }
 
         .instructions {
             font-size: 1.2rem;
-            margin-bottom: 15px;
+            margin-top: 25px;
+            text-align: left;
+            color: #f5f5f5;
         }
 
         .instructions li {
-            margin-left: 20px; 
+            margin: 10px 0 0 25px; 
+            line-height: 1.6;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .instructions li:hover {
+            color: #00c8ff;
+            transform: translateX(5px);
         }
 
         .instructions li span {
-            font-weight: bold; /* Make points bold */
+            font-weight: bold; 
+            color: #00c8ff;
         }
-
         </style>
         """,
         unsafe_allow_html=True
@@ -596,6 +600,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
