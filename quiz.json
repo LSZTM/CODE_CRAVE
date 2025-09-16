@@ -1,6 +1,4 @@
-Of course. Here are 10 easier, higher-quality questions focusing on the fundamentals of C programming, in the requested JSON format.
 
-```json
 {
   "title": "C Programming Basics",
   "semester": "1",
@@ -138,4 +136,4 @@ Of course. Here are 10 easier, higher-quality questions focusing on the fundamen
     }
   ]
 }
-```
+
