@@ -1,139 +1,142 @@
-
 {
-  "title": "C Programming Basics",
+  "title": "C Programming: Variables and Operators",
+  "topic": "Variables",
   "semester": "1",
   "num_questions": 10,
   "questions": [
     {
-      "question": "What is the main purpose of the printf() function in C?",
+      "question": "Which of the following correctly declares an unsigned integer variable named 'age' and initializes it to 25?",
       "options": [
-        "A) To read user input",
-        "B) To display output to the console",
-        "C) To perform mathematical calculations",
-        "D) To declare a new variable"
-      ],
-      "correct_option": 1,
-      "time_limit": 60,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "Which of the following correctly declares an integer variable named 'score'?",
-      "options": [
-        "A) int score;",
-        "B) integer score;",
-        "C) score int;",
-        "D) declare score as int;"
-      ],
-      "correct_option": 0,
-      "time_limit": 60,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "How do you write a single-line comment in C?",
-      "options": [
-        "A) # This is a comment",
-        "B) ",
-        "C) // This is a comment",
-        "D) /* This is a comment"
-      ],
-      "correct_option": 2,
-      "time_limit": 60,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What is the result of the expression 10 % 3 in C?",
-      "options": [
-        "A) 3.33",
-        "B) 3",
-        "C) 0",
-        "D) 1"
+        "A) int age = 25u;",
+        "B) unsigned age = 25;",
+        "C) unsigned int age = 25;",
+        "D) Both B and C are correct"
       ],
       "correct_option": 3,
       "time_limit": 60,
-      "image": null,
+      "difficulty": "Easy",
       "language": "C"
     },
     {
-      "question": "What is the purpose of an 'if' statement in C?",
+      "question": "What will be the output of the following C code snippet? `int a = 5, b = 2; float c = a / b; printf(\"%.2f\", c);`",
       "options": [
-        "A) To repeat a block of code multiple times",
-        "B) To execute code only if a condition is true",
-        "C) To store a value in memory",
-        "D) To define a new function"
+        "A) 2.50",
+        "B) 2.00",
+        "C) 2",
+        "D) Compilation Error"
       ],
       "correct_option": 1,
-      "time_limit": 60,
-      "image": null,
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "explanation": "Integer division (a / b) results in 2. This integer is then assigned to the float 'c', making it 2.0. The format specifier prints it as 2.00.",
       "language": "C"
     },
     {
-      "question": "In the array `int grades[3] = {85, 92, 78};`, what is the value at index 1?",
+      "question": "What is the purpose of the `static` keyword when applied to a local variable?",
       "options": [
-        "A) 85",
-        "B) 92",
-        "C) 78",
-        "D) The code will cause an error"
+        "A) It makes the variable accessible from other files.",
+        "B) It allocates memory for the variable in the heap.",
+        "C) It preserves the variable's value between function calls.",
+        "D) It makes the variable constant."
+      ],
+      "correct_option": 2,
+      "time_limit": 90,
+      "difficulty": "Medium",
+      "language": "C"
+    },
+    {
+      "question": "What is the result of the expression `5 + 2 * 3 - 10 / 5` considering operator precedence?",
+      "options": [
+        "A) 5",
+        "B) 9",
+        "C) 2.2",
+        "D) 1"
       ],
       "correct_option": 1,
-      "time_limit": 60,
-      "image": null,
+      "time_limit": 75,
+      "difficulty": "Easy",
+      "explanation": "Multiplication and division have higher precedence. The expression is evaluated as 5 + 6 - 2, which equals 9.",
       "language": "C"
     },
     {
-      "question": "In C, what special character marks the end of a string?",
+      "question": "A variable declared inside a function is called a:",
       "options": [
-        "A) The newline character (\\n)",
-        "B) The period (.)",
-        "C) The null character (\\0)",
-        "D) The space character ( )"
+        "A) Global variable",
+        "B) Static variable",
+        "C) External variable",
+        "D) Local variable"
+      ],
+      "correct_option": 3,
+      "time_limit": 60,
+      "difficulty": "Easy",
+      "language": "C"
+    },
+    {
+      "question": "What will be the output of `printf(\"%d\", (char)257);`?",
+      "options": [
+        "A) 257",
+        "B) 1",
+        "C) 0",
+        "D) -127"
+      ],
+      "correct_option": 1,
+      "time_limit": 120,
+      "difficulty": "Hard",
+      "explanation": "A signed char typically ranges from -128 to 127. 257 in binary is 100000001. When cast to a char (8 bits), it truncates to 00000001, which is the integer 1.",
+      "language": "C"
+    },
+    {
+      "question": "Which of the following is NOT a valid variable name in C?",
+      "options": [
+        "A) _my_var",
+        "B) myVar123",
+        "C) 2_start_var",
+        "D) MyVar"
       ],
       "correct_option": 2,
       "time_limit": 60,
-      "image": null,
+      "difficulty": "Easy",
+      "explanation": "Variable names in C cannot start with a digit.",
       "language": "C"
     },
     {
-      "question": "Why is the line `#include <stdio.h>` added at the top of a C program?",
+      "question": "What is the difference between `const int *p` and `int * const p`?",
       "options": [
-        "A) To set the program's title",
-        "B) To start the program execution",
-        "C) To include standard input/output functions like printf()",
-        "D) To declare all the program's variables"
-      ],
-      "correct_option": 2,
-      "time_limit": 60,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "What is the significance of the main() function in a C program?",
-      "options": [
-        "A) It is the starting point of program execution",
-        "B) It is where all mathematical calculations must happen",
-        "C) It handles all errors and exceptions automatically",
-        "D) It is an optional function for organizing code"
-      ],
-      "correct_option": 0,
-      "time_limit": 60,
-      "image": null,
-      "language": "C"
-    },
-    {
-      "question": "Which operator is used to check if two values are exactly equal in C?",
-      "options": [
-        "A) =",
-        "B) ==",
-        "C) !=",
-        "D) ~="
+        "A) No difference, they are identical.",
+        "B) The first is a pointer to a constant int; the second is a constant pointer to an int.",
+        "C) The first is a constant pointer to an int; the second is a pointer to a constant int.",
+        "D) Both declarations are invalid."
       ],
       "correct_option": 1,
+      "time_limit": 120,
+      "difficulty": "Hard",
+      "language": "C"
+    },
+    {
+      "question": "The `sizeof()` operator in C returns the size of a variable or data type in:",
+      "options": [
+        "A) Bits",
+        "B) Millimeters",
+        "C) Pixels",
+        "D) Bytes"
+      ],
+      "correct_option": 3,
       "time_limit": 60,
-      "image": null,
+      "difficulty": "Easy",
+      "language": "C"
+    },
+    {
+      "question": "Which header file is required to use functions like `malloc()` and `free()`?",
+      "options": [
+        "A) <stdio.h>",
+        "B) <string.h>",
+        "C) <stdlib.h>",
+        "D) <math.h>"
+      ],
+      "correct_option": 2,
+      "time_limit": 75,
+      "difficulty": "Medium",
       "language": "C"
     }
   ]
 }
-
