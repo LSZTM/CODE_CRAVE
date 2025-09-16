@@ -570,7 +570,7 @@ def landing_page():
     add_landing_styles()
     st.markdown(
         """
-        <h1 class="landing-title">DESIGN AND DEPLOY '25</h1>
+        <h1 class="landing-title">CAMPUS CODERS '25</h1>
         <h3 class="landing-subtitle">AN ULTIMATE QUIZ BATTLE</h3>
         """,
         unsafe_allow_html=True
@@ -600,6 +600,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
